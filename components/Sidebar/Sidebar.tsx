@@ -39,7 +39,7 @@ const Sidebar = ({}: SidebarProps) => {
   const pathname = usePathname();
   const { isSidebarOpen, toggleSidebar } = useSidebar((state) => state);
   const { setisloggedinFalse, setuserAuth } = useAuthStore();
-  
+
   const signout = useCallback(async () => {
     try {
       await signOut(auth);
@@ -107,6 +107,13 @@ const Sidebar = ({}: SidebarProps) => {
                 <LinkItem
                   title="Compose Email"
                   href="/compose"
+                  icon={<Mail className="h-6 w-6" />}
+                ></LinkItem>
+              </li>
+              <li>
+                <LinkItem
+                  title="Email Reponses"
+                  href="/emailResponse"
                   icon={<Mail className="h-6 w-6" />}
                 ></LinkItem>
               </li>

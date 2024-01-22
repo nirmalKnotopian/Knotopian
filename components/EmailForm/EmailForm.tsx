@@ -61,7 +61,7 @@ function EmailForm() {
   };
   const sendEmail = async (subject: string, text: string) => {
     try {
-      await fetch("https://emailmodo.vercel.app/api/sendEmail", {
+      await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/sendEmail`, {
         method: "POST",
         body: JSON.stringify({
           subject,
