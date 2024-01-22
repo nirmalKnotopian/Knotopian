@@ -11,3 +11,24 @@ type User = {
   email: string;
   isloggedin: boolean | null;
 };
+//EMailResponse
+type EmailResponseList = EmailResponse[];
+
+type EmailResponse = {
+  subject: string;
+  responses: UserResponse[];
+  emailId: string;
+  text: string;
+};
+
+type UserResponse = {
+  userEmail: string;
+  response: string;
+};
+
+//Email Provider Zustand
+
+type UserEmailProvider = {
+  responses: UserResponse[];
+  setResponses: (r: UserResponse[]) => void;
+};

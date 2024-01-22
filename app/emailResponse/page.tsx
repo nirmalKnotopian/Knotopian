@@ -1,11 +1,20 @@
 import React from "react";
 import { db } from "@/firebase";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import Link from "next/link";
+import ResponseButton from "@/components/showResponseButton/ResponseButton";
 const getEmails = async () => {
-  const emails = await getDocs(query(collection(db, "emails")));
-  const emailResponseList = [];
-  const updatedList = emails.forEach((e) => emailResponseList.push(e.data()));
-  return updatedList;
+  try {
+    const emails = await getDocs(query(collection(db, "emails")));
+    const emailResponseList: EmailResponseList = [];
+    emails.forEach((e) => {
+      console.log(e.data(), "next");
+      emailResponseList.push({ ...(e.data() as EmailResponse) });
+    });
+    return emailResponseList;
+  } catch (e) {
+    console.log(e);
+  }
 };
 export default async function EmailResponse() {
   const emailResponses = await getEmails();
@@ -20,23 +29,38 @@ export default async function EmailResponse() {
         </div>
 
         <div className="grid grid-cols-6 border-t border-stroke px-4 py-4.5 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5">
-          <div className="col-span-3 flex items-center">
-            <p className="font-medium">Product Name</p>
+          <div className="col-span-2 flex items-center">
+            <p className="font-medium">Email Id</p>
           </div>
-          <div className="col-span-2 hidden items-center sm:flex">
-            <p className="font-medium">Category</p>
+          <div className="col-span-3 hidden items-center sm:flex">
+            <p className="font-medium">Subject</p>
           </div>
-          <div className="col-span-1 flex items-center">
-            <p className="font-medium">Price</p>
-          </div>
-          <div className="col-span-1 flex items-center">
-            <p className="font-medium">Sold</p>
-          </div>
-          <div className="col-span-1 flex items-center">
-            <p className="font-medium">Profit</p>
+          <div className="col-span-3 hidden items-center sm:flex">
+            <p className="font-medium">Text</p>
           </div>
         </div>
       </div>
+      {emailResponses?.map((e) => (
+        <div
+          className="grid grid-cols-6 border-t border-stroke px-4 py-4.5 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5"
+          key={e.emailId}
+        >
+          <div className="col-span-2 flex items-center">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+              <p className="text-sm text-black dark:text-white">{e.emailId}</p>
+            </div>
+          </div>
+          <div className="col-span-3 hidden items-center sm:flex">
+            <p className="text-sm text-black dark:text-white">{e.subject}</p>
+          </div>
+          <div className="col-span-1 flex items-center text-ellipsis">
+            <p className="text-sm text-black dark:text-white">{e.text}</p>
+          </div>
+          <div className="col-span-2 flex items-end justify-end">
+            <ResponseButton ures={e.responses} eid={e.emailId} />
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
