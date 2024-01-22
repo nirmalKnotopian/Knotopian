@@ -13,7 +13,7 @@ function TemplateEmail({
       <Preview>New Message From Us</Preview>
       <Heading>Enter Test Data</Heading>
       <form
-        action={`${process.env.NEXT_PUBLIC_DOMAIN}/api/receiveEmail`}
+        action={`https://emailmodo-9z1t9ku2k-noumans-projects-295dc019.vercel.app/api/receiveEmail`}
         method="POST"
       >
         <label htmlFor="emailId" className="hidden">
@@ -36,7 +36,7 @@ function TemplateEmail({
           value={userEmail}
           className="bg-red hidden border-blue-400"
         />
-        <label htmlFor="response">Username:</label>
+        <label htmlFor="response">Response:</label>
         <input
           name="response"
           id="response"
