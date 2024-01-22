@@ -4,6 +4,9 @@ import * as yup from "yup";
 import { useFormik, FormikProvider, Field, ErrorMessage, Form } from "formik";
 import { MailXIcon } from "lucide-react";
 import { toast } from "react-toastify";
+import { useFormStatus } from "react-dom";
+import Loader from "../common/Loader";
+import ButtonLoader from "../ButtonLoader";
 const validationSchema = yup.object().shape({
   // receivers: yup.array().min(1, "Enter Atleast One Email").of(yup.string()),
   subject: yup.string().required("Subject is Required"),
@@ -12,6 +15,7 @@ const validationSchema = yup.object().shape({
 function EmailForm() {
   const [emailInput, setEmailInput] = useState<string>("");
   const [emailList, setEmailList] = useState<string[]>([]);
+  const [isSendingEmail, setisSendingEmail] = useState<boolean>(false);
   const formikObj = useFormik({
     validationSchema,
     initialValues: {
@@ -20,12 +24,17 @@ function EmailForm() {
       message: "",
     },
     async onSubmit(values, formikHelpers) {
-      // if (emailList.length <= 0) {
-      //   toast.error("Enter Receiver Email");
-      //   return;
-      // }
-      console.log(values);
-      await sendEmail(values.subject, values.message);
+      try {
+        setisSendingEmail(true);
+        console.log(values);
+        await sendEmail(values.subject, values.message);
+        formikHelpers.resetForm();
+        toast.success("Email Sent Succesfully");
+      } catch (e) {
+        toast.error("Couldnt Send You Email Please Try Later");
+      } finally {
+        setisSendingEmail(false);
+      }
     },
   });
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,15 +70,20 @@ function EmailForm() {
   };
   const sendEmail = async (subject: string, text: string) => {
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/sendEmail`, {
-        method: "POST",
-        body: JSON.stringify({
-          subject,
-          text,
-        }),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/sendEmail`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            subject,
+            text,
+          }),
+        },
+      );
+      console.log("Messa", res);
+      if (res.status != 200) throw "Couldnt Send Your Email";
     } catch (e: any) {
-      return toast.error(e);
+      throw e;
     }
   };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -226,10 +240,15 @@ function EmailForm() {
                 />
               </div>
               <button
-                className="my-3 flex w-full justify-center rounded bg-primary p-3 font-medium text-gray"
+                className="my-3 flex w-full  justify-center rounded bg-primary p-3 font-medium text-gray"
                 type="submit"
+                disabled={isSendingEmail}
               >
-                Send Message
+                {isSendingEmail ? (
+                  <ButtonLoader customCss="border-white" />
+                ) : (
+                  "Send Email"
+                )}
               </button>
             </div>
           </form>

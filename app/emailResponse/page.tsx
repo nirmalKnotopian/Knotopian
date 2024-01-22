@@ -1,24 +1,34 @@
 import React from "react";
 import { db } from "@/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import Link from "next/link";
 import ResponseButton from "@/components/showResponseButton/ResponseButton";
+import { toast } from "react-toastify";
+import { Delete } from "lucide-react";
+import Deletebutton from "@/components/DeleteButton.tsx/Deletebutton";
+import Router from "next/router";
 const getEmails = async () => {
   try {
     const emails = await getDocs(query(collection(db, "emails")));
     const emailResponseList: EmailResponseList = [];
     emails.forEach((e) => {
-      console.log(e.data(), "next");
-      emailResponseList.push({ ...(e.data() as EmailResponse) });
+      emailResponseList.push({ ...(e.data() as EmailResponse), id: e.id });
     });
     return emailResponseList;
   } catch (e) {
     console.log(e);
   }
 };
+
 export default async function EmailResponse() {
   const emailResponses = await getEmails();
-  console.log(emailResponses);
   return (
     <div>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -56,8 +66,9 @@ export default async function EmailResponse() {
           <div className="col-span-1 flex items-center text-ellipsis">
             <p className="text-sm text-black dark:text-white">{e.text}</p>
           </div>
-          <div className="col-span-2 flex items-end justify-end">
+          <div className="col-span-2 flex items-center justify-end space-x-2">
             <ResponseButton ures={e.responses} eid={e.emailId} />
+            <Deletebutton id={e.id} />
           </div>
         </div>
       ))}

@@ -19,6 +19,7 @@ type EmailResponse = {
   responses: UserResponse[];
   emailId: string;
   text: string;
+  id: string;
 };
 
 type UserResponse = {

@@ -16,7 +16,7 @@ function ResponseDetail() {
           <p className="font-medium">Message</p>
         </div>
       </div>
-      {responses.map((r) => (
+      {responses?.map((r) => (
         <div
           className="grid grid-cols-6 border-t border-stroke px-4 py-4.5 dark:border-strokedark md:px-6 2xl:px-7.5"
           key={r.response}

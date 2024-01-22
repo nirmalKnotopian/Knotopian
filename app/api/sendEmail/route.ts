@@ -5,7 +5,8 @@ import React from "react";
 import { db } from "@/firebase";
 import { addDoc, collection, setDoc } from "firebase/firestore";
 import { UUID, randomUUID } from "crypto";
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require("uuid");
+
 export async function POST(req: NextRequest) {
   try {
     console.log("Recieved");
@@ -28,13 +29,19 @@ export async function POST(req: NextRequest) {
         userEmail: "noumankhan95@yahoo.com",
       }),
     });
-    console.log(res);
+    console.log(res, "here");
+    if (res.error?.name) {
+      throw res.error;
+    }
     return NextResponse.json({
-      status: 0,
+      status: 1,
       data: { message: res.data, error: res.error },
     });
-  } catch (e) {
-    console.log(e);
-    return NextResponse.json({ status: 0, data: { message: e } });
+  } catch (e: any) {
+    console.log(e, "Here");
+    return NextResponse.json(
+      { status: 0, data: { message: e.message } },
+      { status: e.statusCode },
+    );
   }
 }
