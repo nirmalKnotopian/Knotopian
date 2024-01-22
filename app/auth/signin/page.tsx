@@ -43,6 +43,7 @@ const SignIn: React.FC = () => {
           emailRef.current?.value!,
           passwordRef.current?.value!,
         );
+
         const user = await getDoc(doc(db, "users", u.user.uid));
         toast.success("Signed In");
         setuserAuth({
@@ -71,16 +72,14 @@ const SignIn: React.FC = () => {
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="px-26 py-17.5 text-center">
               {/* <Link className="mb-5.5 inline-block" href="/"> */}
-                <h1 className="text-2xl font-semibold text-white">
-                  EmailSender
-                </h1>
-                <Image
-                  className="dark:hidden"
-                  src={"/images/logo/logo-dark.svg"}
-                  alt="Logo"
-                  width={176}
-                  height={32}
-                />
+              <h1 className="text-2xl font-semibold text-white">EmailSender</h1>
+              <Image
+                className="dark:hidden"
+                src={"/images/logo/logo-dark.svg"}
+                alt="Logo"
+                width={176}
+                height={32}
+              />
               {/* </Link> */}
 
               <p className="2xl:px-20">

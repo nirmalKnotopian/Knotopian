@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* Home */}
-      <CheckAuth>
+      Home
+      {/* <CheckAuth>
         <ECommerce />
-      </CheckAuth>
+      </CheckAuth> */}
     </>
   );
 }

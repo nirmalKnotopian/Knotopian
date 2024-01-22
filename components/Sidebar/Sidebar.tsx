@@ -39,6 +39,7 @@ const Sidebar = ({}: SidebarProps) => {
   const pathname = usePathname();
   const { isSidebarOpen, toggleSidebar } = useSidebar((state) => state);
   const { setisloggedinFalse, setuserAuth } = useAuthStore();
+  
   const signout = useCallback(async () => {
     try {
       await signOut(auth);

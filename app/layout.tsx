@@ -29,7 +29,7 @@ export default function RootLayout({
     setisloggedinFalse,
   } = useAuthStore();
   const router = useRouter();
-  useLayoutEffect(() => {
+  useEffect(() => {
     return onAuthStateChanged(auth, async (user) => {
       try {
         console.log("run");
@@ -44,7 +44,7 @@ export default function RootLayout({
           setisloggedinTrue();
         } else {
           setisloggedinFalse();
-          // router.replace("/auth/signin");
+          router.replace("/auth/signin");
         }
       } catch (e) {
         console.log("e", e);
@@ -53,7 +53,6 @@ export default function RootLayout({
       }
     });
   }, []);
-  console.log("user", u);
   return (
     <html lang="en">
       <body>
