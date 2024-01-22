@@ -13,7 +13,7 @@ function TemplateEmail({
       <Preview>New Message From Us</Preview>
       <Heading>Enter Test Data</Heading>
       <form
-        action={`https://emailmodo-9z1t9ku2k-noumans-projects-295dc019.vercel.app/api/receiveEmail`}
+        action={`https://emailmodo.vercel.app/api/receiveEmail`}
         method="POST"
       >
         <label htmlFor="emailId" className="hidden">

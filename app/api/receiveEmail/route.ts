@@ -26,11 +26,10 @@ export async function POST(req: NextRequest) {
       // Access the data of the first document (you may loop through querySnapshot.docs for multiple documents)
       const emailData = email.docs[0].data();
       await updateDoc(doc(db, "emails", email.docs[0].id), {
-        response: r,
-        userEmail: uEmail,
+        responses: arrayUnion({ response: r, userEmail: uEmail }),
       });
-    }else{
-      throw "No Email Exists"
+    } else {
+      throw "No Email Exists";
     }
     return NextResponse.json(
       {
