@@ -14,18 +14,25 @@ import { toast } from "react-toastify";
 import { Delete } from "lucide-react";
 import Deletebutton from "@/components/DeleteButton.tsx/Deletebutton";
 import Router from "next/router";
-const getEmails = async () => {
-  try {
-    const emails = await getDocs(query(collection(db, "emails")));
-    const emailResponseList: EmailResponseList = [];
-    emails.forEach((e) => {
-      emailResponseList.push({ ...(e.data() as EmailResponse), id: e.id });
-    });
-    return emailResponseList;
-  } catch (e) {
-    console.log(e);
-  }
-};
+import { revalidatePath, unstable_cache } from "next/cache";
+const getEmails = unstable_cache(
+  async () => {
+    try {
+      const emails = await getDocs(query(collection(db, "emails")));
+      const emailResponseList: EmailResponseList = [];
+      emails.forEach((e) => {
+        emailResponseList.push({ ...(e.data() as EmailResponse), id: e.id });
+      });
+      return emailResponseList;
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  ["EmailResponses"],
+  {
+    tags: ["EmailResponses"],
+  },
+);
 
 export default async function EmailResponse() {
   const emailResponses = await getEmails();
