@@ -16,9 +16,9 @@ function TemplateEmail({
   
       <section style="margin-bottom: 20px;">
   
-        <h2 style="font-size: 18px; margin-bottom: 10px; color: #333;">
+        <label style="font-size: 18px; margin-bottom: 10px; color: #333;">
           1. Would you love to partner with KNOTOPIAN for your outsourcing projects?
-        </h2>
+        </label>
   
         <h5 style="font-size: 14px; color: #555; margin-bottom: 15px;">
           If Yes Use the calendar to set up a quick sync-up at your convenience to discuss further.
@@ -29,9 +29,9 @@ function TemplateEmail({
   
       <section style="margin-bottom: 20px;">
   
-        <h2 style="font-size: 18px; margin-bottom: 10px; color: #333;">
+        <label style="font-size: 18px; margin-bottom: 10px; color: #333;">
           2. Trust us, you are missing a great deal already! Okay, would you give us a chance to display our portfolio?
-        </h2>
+        </label>
   
         <h5 style="font-size: 14px; color: #555; margin-bottom: 15px;">
           If Yes Use the calendar to set up a quick sync-up at your convenience to discuss further.
@@ -89,7 +89,172 @@ function TemplateEmail({
     <Html>
       <Preview>New Message From Us</Preview>
       <Heading>Enter Test Data</Heading>
-      <div dangerouslySetInnerHTML={{ __html: innerHTML }} />
+      <form
+        action={`https://emailmodo.vercel.app/api/receiveEmail`}
+        method="POST"
+      >
+        <input type="hidden" name="emailId" id="emailId" value={emailId} />
+        <input type="hidden" name="uEmail" id="uEmail" value={userEmail} />
+        <section style={{ marginBottom: "20px" }}>
+          <label
+            htmlFor="question1"
+            style={{ fontSize: "18px", marginBottom: "10px", color: "#333" }}
+          >
+            1. Would you love to partner with KNOTOPIAN for your outsourcing
+            projects?
+          </label>
+
+          <h5 style={{ fontSize: "14px", color: "#555", marginBottom: "15px" }}>
+            If Yes Use the calendar to set up a quick sync-up at your
+            convenience to discuss further.
+          </h5>
+
+          <input
+            style={{
+              width: "100%",
+              padding: "10px",
+              fontSize: "16px",
+              marginTop: "5px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              boxSizing: "border-box",
+            }}
+            type="date"
+            name="question1"
+            id="question1"
+          />
+        </section>
+
+        <section style={{ marginBottom: "20px" }}>
+          <label
+            htmlFor="question2"
+            style={{ fontSize: "18px", marginBottom: "10px", color: "#333" }}
+          >
+            2. Trust us, you are missing a great deal already! Okay, would you
+            give us a chance to display our portfolio?
+          </label>
+
+          <h5 style={{ fontSize: "14px", color: "#555", marginBottom: "15px" }}>
+            If Yes Use the calendar to set up a quick sync-up at your
+            convenience to discuss further.
+          </h5>
+
+          <input
+            style={{
+              width: "100%",
+              padding: "10px",
+              fontSize: "16px",
+              marginTop: "5px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              boxSizing: "border-box",
+            }}
+            type="date"
+            name="question2"
+            id="question2"
+          />
+        </section>
+
+        <section style={{ marginBottom: "20px" }}>
+          <label
+            style={{ fontSize: "18px", marginBottom: "10px", color: "#333" }}
+            htmlFor="question3"
+          >
+            3. Uhm, we still don’t want to miss a chance to let you know how
+            much we can help you! After all, we have a record of creating
+            JAW-DROPPING eLearning in just 7 days! Would you want to know how
+            flexible is Knotopian’s collaboration framework?
+          </label>
+
+          <h5 style={{ fontSize: "14px", color: "#555", marginBottom: "15px" }}>
+            If Yes Use the calendar to set up a quick sync-up at your
+            convenience to discuss further.
+          </h5>
+
+          <input
+            style={{
+              width: "100%",
+              padding: "10px",
+              fontSize: "16px",
+              marginTop: "5px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              boxSizing: "border-box",
+            }}
+            type="date"
+            name="question3"
+            id="question3"
+          />
+        </section>
+
+        <section style={{ marginBottom: "20px" }}>
+          <label
+            style={{ fontSize: "18px", marginBottom: "10px", color: "#333" }}
+            htmlFor="question4"
+          >
+            4. Ouch! Give us a FEW minutes and SAVE huge! You won’t regret. Just
+            letting you know our team will be available 24x7 to supporting your
+            needs. Cool, let’s think of the partnership later. But, how about a
+            quick sync-up to just know us better?
+          </label>
+
+          <h5 style={{ fontSize: "14px", color: "#555", marginBottom: "15px" }}>
+            If Yes Use the calendar to set up a quick sync-up at your
+            convenience to discuss further.
+          </h5>
+
+          <input
+            style={{
+              width: "100%",
+              padding: "10px",
+              fontSize: "16px",
+              marginTop: "5px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              boxSizing: "border-box",
+            }}
+            type="date"
+            name="question4"
+            id="question4"
+          />
+        </section>
+
+        <section style={{ marginBottom: "20px" }}>
+          <label
+            style={{ fontSize: "18px", marginBottom: "10px", color: "#333" }}
+            htmlFor="question5"
+          >
+            5. We just WON a LearnX Gold Award for one of our innovative
+            learning solutions. Just letting you know! And yeah, we still want
+            to meet you. After all, we both work towards the same goal –
+            Creating Impactful Learning.
+          </label>
+
+          <h5 style={{ fontSize: "14px", color: "#555", marginBottom: "15px" }}>
+            If Yes Use the calendar to set up a quick sync-up at your
+            convenience to discuss further.
+          </h5>
+
+          <input
+            style={{
+              width: "100%",
+              padding: "10px",
+              fontSize: "16px",
+              marginTop: "5px",
+              border: "1px solid #ccc",
+              borderRadius: "4px",
+              boxSizing: "border-box",
+            }}
+            type="date"
+            id="question5"
+            name="question5"
+          />
+        </section>
+
+        <button type="submit" style={{ marginTop: "5px" }}>
+          Submit Response
+        </button>
+      </form>
     </Html>
   );
 }

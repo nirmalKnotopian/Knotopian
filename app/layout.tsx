@@ -74,7 +74,7 @@ export default function RootLayout({
                   ) : (
                     <>
                       <Sidebar />
-                      <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+                      <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden pl-20 lg:pl-0">
                         {/* <!-- ===== Header Start ===== --> */}
                         <Header
                           sidebarOpen={sidebarOpen}
