@@ -26,9 +26,9 @@ function EmailForm() {
     async onSubmit(values, formikHelpers) {
       try {
         setisSendingEmail(true);
-        console.log(values);
+        console.log(emailList);
         await sendEmail(values.subject, values.message);
-        formikHelpers.resetForm();
+        // formikHelpers.resetForm();
         toast.success("Email Sent Succesfully");
       } catch (e) {
         toast.error("Couldnt Send You Email Please Try Later");
@@ -71,12 +71,13 @@ function EmailForm() {
   const sendEmail = async (subject: string, text: string) => {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/sendEmail`,
+        `${process.env.NEXT_PUBLIC_DOMAIN}/api/sendsmtpemail`,
         {
           method: "POST",
           body: JSON.stringify({
             subject,
             text,
+            receps: emailList,
           }),
         },
       );

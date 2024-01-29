@@ -4,7 +4,6 @@ import TemplateEmail from "@/app/email/Template";
 import React from "react";
 import { db } from "@/firebase";
 import { addDoc, collection, setDoc } from "firebase/firestore";
-import { UUID, randomUUID } from "crypto";
 const { v4: uuidv4 } = require("uuid");
 
 export async function POST(req: NextRequest) {
@@ -28,6 +27,7 @@ export async function POST(req: NextRequest) {
         emailId,
         userEmail: "noumankhan95@yahoo.com",
       }),
+      
     });
     console.log(res, "here");
     if (res.error?.name) {
