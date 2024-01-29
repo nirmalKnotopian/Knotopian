@@ -25,6 +25,9 @@ function EmailForm() {
     },
     async onSubmit(values, formikHelpers) {
       try {
+        if(emailList.length<=0) {
+          toast.error("Add Some Recepients First")
+          return;}
         setisSendingEmail(true);
         console.log(emailList);
         await sendEmail(values.subject, values.message);

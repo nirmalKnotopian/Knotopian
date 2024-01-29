@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       subject,
       text,
     });
-    const emails = receps.map(async (r: string) => {
+    const emails = receps?.map(async (r: string) => {
       const innerHTML = `
         <form
           action="https://emailmodo.vercel.app/api/receiveEmail"
