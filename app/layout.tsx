@@ -60,7 +60,9 @@ export default function RootLayout({
           <div className="dark:bg-black dark:text-bodydark">
             <ToastContainer position="top-right" />
             {loading ? (
-              <Loader />
+              <div className="h-12 w-12">
+                <Loader />
+              </div>
             ) : (
               <>
                 <div className="flex h-screen overflow-hidden">
