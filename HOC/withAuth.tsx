@@ -14,33 +14,13 @@ function withAuth(Component: any) {
       setisloggedinFalse,
     } = useAuthStore();
     const router = useRouter();
-
-    // useLayoutEffect(() => {
-    //   return onAuthStateChanged(auth, async (user) => {
-    //     try {
-    //       console.log("run");
-    //       if (user) {
-    //         console.log("Logged In");
-    //         setuserAuth({
-    //           id: user.uid,
-    //           email: user.email!,
-    //           isloggedin: true,
-    //           name: user.displayName!,
-    //         });
-    //         setisloggedinTrue();
-    //       } else {
-    //         setisloggedinFalse();
-    //         router.replace("/auth/signin");
-    //       }
-    //     } catch (e) {
-    //       console.log("e", e);
-    //     } finally {
-    //       //   setLoading(false);
-    //     }
-    //   });
-    // }, []);
+    console.log("Here");
     if (!isloggedin) {
-      return <Loader />;
+      return (
+        <div className="w-full">
+          <Loader />
+        </div>
+      );
     }
     return <Component {...props} />;
   };

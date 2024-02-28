@@ -55,12 +55,18 @@ export default function RootLayout({
   }, []);
   return (
     <html lang="en">
-      <body>
-        <Suspense fallback={<Loader />}>
-          <div className="dark:bg-black dark:text-bodydark">
+      <body className="w-full dark:bg-black">
+        <Suspense
+          fallback={
+            <div className="dark:bg-black">
+              <Loader />
+            </div>
+          }
+        >
+          <div className="w-full dark:bg-black dark:text-bodydark">
             <ToastContainer position="top-right" />
             {loading ? (
-              <div className="h-12 w-12">
+              <div className="w-full dark:bg-black ">
                 <Loader />
               </div>
             ) : (

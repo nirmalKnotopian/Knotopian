@@ -27,7 +27,6 @@ export async function POST(req: NextRequest) {
         emailId,
         userEmail: "noumankhan95@yahoo.com",
       }),
-      
     });
     console.log(res, "here");
     if (res.error?.name) {

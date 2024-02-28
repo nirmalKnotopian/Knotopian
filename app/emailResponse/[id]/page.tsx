@@ -6,6 +6,7 @@ import React from "react";
 function ResponseDetail() {
   const { responses } = useEmailProvider();
   console.log("Page Responses", responses);
+
   return (
     <div>
       <div className="grid grid-cols-6 border-t border-stroke px-4 py-4.5 dark:border-strokedark md:px-6 2xl:px-7.5">
@@ -16,7 +17,7 @@ function ResponseDetail() {
           <p className="font-medium">Message</p>
         </div>
       </div>
-
+      {!responses && <p>No Replies To This Email</p>}
       {responses?.map((r) => (
         <div
           className="grid max-h-65 grid-cols-6 overflow-auto border-t border-stroke px-4 py-4.5 dark:border-strokedark md:px-6 2xl:px-7.5"
@@ -32,14 +33,14 @@ function ResponseDetail() {
                 projects?
               </h4>
               <p className="text-sm text-black dark:text-white">
-                Answer: {r.response?.q1}
+                Answer: {r.response?.q1 || "No Response"}
               </p>
               <h4>
                 2. Trust us, you are missing a great deal already! Okay, would
                 you give us a chance to display our portfolio?
               </h4>
               <p className="text-sm text-black dark:text-white">
-                Answer: {r.response?.q2}
+                Answer: {r.response?.q2 || "No Response"}
               </p>
               <h4>
                 3. Uhm, we still don’t want to miss a chance to let you know how
@@ -48,7 +49,7 @@ function ResponseDetail() {
                 how flexible is Knotopian’s collaboration framework?
               </h4>
               <p className="text-sm text-black dark:text-white">
-                Answer: {r.response?.q3}
+                Answer: {r.response?.q3 || "No Response"}
               </p>
               <h4>
                 4. Ouch! Give us a FEW minutes and SAVE huge! You won’t regret.
@@ -57,7 +58,7 @@ function ResponseDetail() {
                 later. But, how about a quick sync-up to just know us better?
               </h4>
               <p className="text-sm text-black dark:text-white">
-                Answer: {r.response?.q4}
+                Answer: {r.response?.q4 || "No Response"}
               </p>
               <h4>
                 5. We just WON a LearnX Gold Award for one of our innovative
@@ -66,7 +67,7 @@ function ResponseDetail() {
                 – Creating Impactful Learning.
               </h4>
               <p className="text-sm text-black dark:text-white">
-                Answer: {r.response?.q5}
+                Answer: {r.response?.q5 || "No Response"}
               </p>
             </>
           </div>

@@ -30,15 +30,15 @@ const Header = (props: {
 
           <Link className="block flex-shrink-0 lg:hidden" href="/">
             <Image
-              width={32}
-              height={32}
-              src={"/images/logo/logo-icon.svg"}
+              width={80}
+              height={62}
+              src={"/images/logo/CLogo.png"}
               alt="Logo"
             />
           </Link>
         </div>
 
-        <div className="hidden sm:block">
+        {/* <div className="hidden sm:block">
           <form action="https://formbold.com/s/unique_form_id" method="POST">
             <div className="relative">
               <button className="absolute left-0 top-1/2 -translate-y-1/2">
@@ -72,7 +72,7 @@ const Header = (props: {
               />
             </div>
           </form>
-        </div>
+        </div> */}
 
         <div className="flex items-center gap-3 2xsm:gap-7">
           <ul className="flex items-center gap-2 2xsm:gap-4">

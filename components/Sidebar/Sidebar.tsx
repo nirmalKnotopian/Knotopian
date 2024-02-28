@@ -23,6 +23,7 @@ import {
   MousePointerClick,
   LogOutIcon,
   Mail,
+  MailPlusIcon,
 } from "lucide-react";
 import { useSidebar } from "./use-sidebar";
 import { cn } from "@/app/libs/utlis";
@@ -33,13 +34,14 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/firebase";
 import { toast } from "react-toastify";
 import useAuthStore from "@/store/userAuth";
+import useColorMode from "@/hooks/useColorMode";
 interface SidebarProps {}
 
 const Sidebar = ({}: SidebarProps) => {
   const pathname = usePathname();
   const { isSidebarOpen, toggleSidebar } = useSidebar((state) => state);
   const { setisloggedinFalse, setuserAuth } = useAuthStore();
-
+  const [colormode, setColorMode] = useColorMode();
   const signout = useCallback(async () => {
     try {
       await signOut(auth);
@@ -50,6 +52,7 @@ const Sidebar = ({}: SidebarProps) => {
       toast.success("Failed to Signed Out");
     }
   }, []);
+  console.log("Colormode", colormode);
   return (
     <aside
       className={cn(
@@ -61,20 +64,21 @@ const Sidebar = ({}: SidebarProps) => {
     >
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="relative flex w-full items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
-        {/* <Link className="flex items-center" href="/"> */}
-        <Image
-          className="h-6 w-6 rounded-md"
-          width={400}
-          height={400}
-          src={"/images/logo/logo-icon.png"}
-          alt="Logo"
-        />
+        <Link className="flex items-center" href="/">
+          <Image
+            className="h-6 w-28 rounded-md object-contain"
+            width={400}
+            height={400}
+            src={"/images/logo/CLogo.png"}
+            alt="Logo"
+          />
+        </Link>
         {isSidebarOpen && (
-          <h1 className=" ml-2 text-xl font-semibold text-white">MailMode</h1>
-        )}
-        {/* </Link> */}
-        {isSidebarOpen && (
-          <MenuIcon onClick={toggleSidebar} className="h-6 w-6" />
+          <MenuIcon
+            onClick={toggleSidebar}
+            className="h-6 w-6  text-black dark:text-white "
+            color={colormode === "light" ? "black" : "white"}
+          />
         )}
       </div>
       {/* <!-- SIDEBAR HEADER --> */}
@@ -107,12 +111,12 @@ const Sidebar = ({}: SidebarProps) => {
                 <LinkItem
                   title="Compose Email"
                   href="/compose"
-                  icon={<Mail className="h-6 w-6" />}
+                  icon={<MailPlusIcon className="h-6 w-6" />}
                 ></LinkItem>
               </li>
               <li>
                 <LinkItem
-                  title="Email Reponses"
+                  title="Email Responses"
                   href="/emailResponse"
                   icon={<Mail className="h-6 w-6" />}
                 ></LinkItem>

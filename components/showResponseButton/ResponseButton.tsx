@@ -9,10 +9,11 @@ function ResponseButton({ ures, eid }: { ures: UserResponse[]; eid: string }) {
   return (
     <Link
       href={`/emailResponse/${eid}`}
-      className="inline-flex items-center justify-center rounded-md bg-blue-400 px-4 py-4 text-center font-sm text-white hover:bg-opacity-90 lg:px-4xl:px-4"
+      className="font-sm text-md inline-flex items-center justify-center rounded-md bg-blue-400 p-2 px-1 py-1 text-center text-white hover:bg-opacity-90 lg:px-6"
       onClick={() => {
         setResponses(ures);
       }}
+      prefetch={false}
     >
       View Responses
     </Link>

@@ -44,40 +44,57 @@ export default async function EmailResponse() {
           </h4>
         </div>
 
-        <div className="grid grid-cols-6 border-t border-stroke px-4 py-4.5 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5">
-          <div className="col-span-2 flex items-center">
-            <p className="font-medium">Email Id</p>
-          </div>
-          <div className="col-span-3 hidden items-center sm:flex">
-            <p className="font-medium">Subject</p>
-          </div>
-          <div className="col-span-3 hidden items-center sm:flex">
-            <p className="font-medium">Text</p>
-          </div>
+        <div className="overflow-x-auto">
+          <table className="min-w-full border border-stroke dark:border-strokedark">
+            <thead>
+              <tr className="dark:border-bdark border-b border-stroke px-4 py-4.5">
+                <th className="px-4 py-4.5 text-start">
+                  <p className="font-medium">Email Id</p>
+                </th>
+                <th className="hidden px-4 py-4.5 text-start sm:table-cell">
+                  <p className="font-medium">Subject</p>
+                </th>
+                <th className="hidden px-4 py-4.5 text-start sm:table-cell">
+                  <p className="font-medium">Text</p>
+                </th>
+                <th className="hidden px-4 py-4.5 text-start sm:table-cell">
+                  <p className="font-medium">Actions</p>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {emailResponses?.map((e) => (
+                <tr
+                  key={e.emailId}
+                  className="dark:border-bdark border-b border-stroke px-4 py-4.5"
+                >
+                  <td className="px-4 py-4.5">
+                    <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                      <p className="text-sm text-black dark:text-white">
+                        {e.emailId}
+                      </p>
+                    </div>
+                  </td>
+                  <td className="hidden px-4 py-4.5 sm:table-cell">
+                    <p className="text-sm text-black dark:text-white">
+                      {e.subject}
+                    </p>
+                  </td>
+                  <td className="hidden px-4 py-4.5 sm:table-cell">
+                    <p className="text-sm text-black dark:text-white">
+                      {e.text}
+                    </p>
+                  </td>
+                  <td className="flex hidden items-center space-x-2 px-4 py-4.5 sm:table-cell">
+                    <ResponseButton ures={e.responses} eid={e.emailId} />
+                    <Deletebutton id={e.id} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-      {emailResponses?.map((e) => (
-        <div
-          className="grid grid-cols-6 border-t border-stroke px-4 py-4.5 dark:border-strokedark sm:grid-cols-8 md:px-6 2xl:px-7.5"
-          key={e.emailId}
-        >
-          <div className="col-span-2 flex items-center">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-              <p className="text-sm text-black dark:text-white">{e.emailId}</p>
-            </div>
-          </div>
-          <div className="col-span-3 hidden items-center sm:flex">
-            <p className="text-sm text-black dark:text-white">{e.subject}</p>
-          </div>
-          <div className="col-span-1 flex items-center text-ellipsis">
-            <p className="text-sm text-black dark:text-white">{e.text}</p>
-          </div>
-          <div className="col-span-2 flex items-center justify-end space-x-2">
-            <ResponseButton ures={e.responses} eid={e.emailId} />
-            <Deletebutton id={e.id} />
-          </div>
-        </div>
-      ))}
     </div>
   );
 }

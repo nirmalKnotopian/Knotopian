@@ -3,7 +3,7 @@ import Loader from "@/components/common/Loader";
 function loading() {
   return (
     <div>
-      <Loader /> 
+      <Loader />
     </div>
   );
 }
