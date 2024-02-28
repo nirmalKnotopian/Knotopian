@@ -1,4 +1,4 @@
-export const revalidate = 1000;
+export const revalidate = 10;
 import { Metadata } from "next";
 import EmailSentCard from "@/components/TrackingCard/EmailSentCard";
 import TotalResponses from "@/components/TrackingCard/TotalResponses";

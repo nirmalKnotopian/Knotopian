@@ -77,7 +77,6 @@ const Sidebar = ({}: SidebarProps) => {
           <MenuIcon
             onClick={toggleSidebar}
             className="h-6 w-6  text-black dark:text-white "
-            color={colormode === "light" ? "black" : "white"}
           />
         )}
       </div>
