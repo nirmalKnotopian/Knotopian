@@ -24,6 +24,7 @@ import {
   LogOutIcon,
   Mail,
   MailPlusIcon,
+  SidebarOpen,
 } from "lucide-react";
 import { useSidebar } from "./use-sidebar";
 import { cn } from "@/app/libs/utlis";
@@ -52,7 +53,7 @@ const Sidebar = ({}: SidebarProps) => {
       toast.success("Failed to Signed Out");
     }
   }, []);
-  console.log("Colormode", colormode);
+  console.log("Colormode", isSidebarOpen);
   return (
     <aside
       className={cn(
@@ -76,7 +77,9 @@ const Sidebar = ({}: SidebarProps) => {
         {isSidebarOpen && (
           <MenuIcon
             onClick={toggleSidebar}
-            className="h-6 w-6  text-black dark:text-white "
+            className={`h-6 w-6 cursor-pointer  ${isSidebarOpen ? "text-white" : "text-orange-950"}`}
+            color={isSidebarOpen ? "white" : "black"}
+            fill={isSidebarOpen ? "white" : "black"}
           />
         )}
       </div>
