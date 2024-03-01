@@ -26,13 +26,14 @@ export async function POST(req: NextRequest) {
       ? parseInt(totalquestions as string, 10)
       : 0;
     console.log("Total Questions", totalquestions);
+    console.log("sitll interested", stillInterested);
     for (let i = 1; i <= numQuestions; i++) {
       const questionResponse = data.get(`question${i}`);
       console.log("q response " + i, questionResponse);
 
-      responses[`q${i}`] = questionResponse;
+      responses[`q${i}`] = questionResponse || "no Response";
     }
-    responses["stillInterested"] = stillInterested;
+    responses["stillInterested"] = stillInterested || "no Response";
     const q = query(collection(db, "emails"), and(where("emailId", "==", eid)));
     const email = await getDocs(q);
     let updatedResponses = [];
