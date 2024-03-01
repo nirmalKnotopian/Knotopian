@@ -134,7 +134,13 @@ export async function POST(req: NextRequest) {
     </div>`
          );
        }, "")}     
-    
+       <label for="stillInterested" class="hide" [class]="questionsState.selectedQuestion == ${RestOfQuestion.length + 2} ? 'show' : 'hide'" style="margin-bottom: 20px">
+       <h1 style="font-size: 18px; margin-bottom: 10px; color: #333">
+        Are You Still Interested In Proceeding? 
+       </h1>
+       <input type="radio" id="considerLater" on="change:myform.submit"  name="stillInterested" value="Consider Later"    > Consider Later
+       <input type="radio" id="Not Interested"  name="stillInterested" on="change:myform.submit" value="Not Interested Anymore"   > Not Interested Anymore     
+     </label>  
             <button 
                      style="
                     background-color: #E4D00A;
