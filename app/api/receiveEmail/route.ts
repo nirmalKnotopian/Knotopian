@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
       const emailData = email.docs[0]?.data();
       console.log(emailData, "emailData");
       if (emailData?.responses?.length == 0) {
-        updatedResponses.push(responses);
+        updatedResponses.push({ responses, userEmail: uEmail });
       } else {
         updatedResponses = emailData?.responses?.map(
           (r: { response: any; userEmail: string }) => {
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
           },
         );
       }
-
+      console.log("Updated Responses", updatedResponses);
       await updateDoc(doc(db, "emails", email.docs[0].id), {
         responses: updatedResponses,
       });
