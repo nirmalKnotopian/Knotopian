@@ -53,7 +53,7 @@ function ResponseDetail() {
                       </p>
                     </>
                   ))}
-              {r.response && questions && (
+              {/* {r.response && questions && (
                 <>
                   <h4>Are You Still Interested In Proceeding?</h4>
                   <p className="text-sm text-black dark:text-white">
@@ -65,7 +65,7 @@ function ResponseDetail() {
                     }
                   </p>
                 </>
-              )}
+              )} */}
             </>
           </div>
         </div>
