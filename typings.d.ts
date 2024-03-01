@@ -17,6 +17,7 @@ type EmailResponseList = EmailResponse[];
 type EmailResponse = {
   subject: string;
   responses: UserResponse[];
+  modifiedResponses: string[];
   emailId: string;
   text: string;
   id: string;
@@ -25,11 +26,7 @@ type EmailResponse = {
 type UserResponse = {
   userEmail: string;
   response: {
-    q1: string;
-    q2: string;
-    q3: string;
-    q4: string;
-    q5: string;
+    [key: string]: string;
   };
 };
 

@@ -19,7 +19,7 @@ function ResponseDetail() {
   useEffect(() => {
     getQuestions();
   }, []);
-
+  console.log(questions);
   return (
     <div>
       <div className="grid grid-cols-6 border-t border-stroke px-4 py-4.5 dark:border-strokedark md:px-6 2xl:px-7.5">
@@ -43,29 +43,31 @@ function ResponseDetail() {
             <>
               {r.response &&
                 questions &&
-                Object.values(r.response)
-                  .slice(0, -1)
-                  .map((q, index) => (
-                    <>
-                      <h4>{questions[index]}</h4>
-                      <p className="text-sm text-black dark:text-white">
-                        Answer: {q || "No Response"}
-                      </p>
-                    </>
-                  ))}
-              {/* {r.response && questions && (
+                Object.entries(r.response)
+                  .filter(([key]) => key !== "stillInterested")
+                  .map((q, index) => {
+                    console.log(q, index);
+                    if (questions[q[0][1] as unknown as number]) {
+                      return (
+                        <>
+                          <h4>{questions[q[0][1] as unknown as number]}</h4>
+                          <p className="text-sm text-black dark:text-white">
+                            Answer: {q[1] || "No Response"}
+                          </p>
+                        </>
+                      );
+                    } else {
+                      return null;
+                    }
+                  })}
+              {r.response && questions && (
                 <>
                   <h4>Are You Still Interested In Proceeding?</h4>
                   <p className="text-sm text-black dark:text-white">
-                    Answer:{" "}
-                    {
-                      Object.values(r.response)[
-                        Object.values(r.response).length - 1
-                      ]
-                    }
+                    Answer: {r.response["stillInterested"]}
                   </p>
                 </>
-              )} */}
+              )}
             </>
           </div>
         </div>
