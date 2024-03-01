@@ -37,6 +37,7 @@
     "react-apexcharts": "^1.4.1",
     "react-dom": "latest",
     "react-email": "2.0.0",
+    "react-hot-toast": "^2.4.1",
     "react-jvectormap": "^0.0.16",
     "react-toastify": "^10.0.1",
     "resend": "^3.0.0",

@@ -1,4 +1,3 @@
-"use client";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { AreaChart, SimpleBar, SimpleDonut } from "@/components/Charts";
 import withAuth from "@/HOC/withAuth";
@@ -15,4 +14,4 @@ const Chart = () => {
   );
 };
 
-export default withAuth(Chart);
+export default Chart;

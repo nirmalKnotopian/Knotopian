@@ -5,6 +5,7 @@ import TotalResponses from "@/components/TrackingCard/TotalResponses";
 export const metadata: Metadata = {
   title: "Chatlet",
   description: "This is Home Page For Chatlet",
+
   // other metadata
 };
 

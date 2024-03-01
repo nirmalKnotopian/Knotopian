@@ -24,6 +24,7 @@ import {
   LogOutIcon,
   Mail,
   MailPlusIcon,
+  MailQuestion,
   SidebarOpen,
 } from "lucide-react";
 import { useSidebar } from "./use-sidebar";
@@ -121,6 +122,13 @@ const Sidebar = ({}: SidebarProps) => {
                   title="Email Responses"
                   href="/emailResponse"
                   icon={<Mail className="h-6 w-6" />}
+                ></LinkItem>
+              </li>
+              <li>
+                <LinkItem
+                  title="Edit Email Questions"
+                  href="/EditDynamicEmail"
+                  icon={<MailQuestion className="h-6 w-6" />}
                 ></LinkItem>
               </li>
               {/* <!-- Menu Item Calendar --> */}

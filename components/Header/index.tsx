@@ -23,10 +23,10 @@ const Header = (props: {
               aria-hidden={!isSidebarOpen}
               aria-controls="sidebar"
             >
-              <MenuIcon 
-                 className={`h-6 w-6  ${isSidebarOpen ? "text-white" : "text-orange-950"}`}
-                 color={isSidebarOpen ? "white" : "black"}
-                 fill={isSidebarOpen ? "white" : "black"}
+              <MenuIcon
+                className={`h-6 w-6  ${isSidebarOpen ? "text-white" : "text-orange-950"}`}
+                color={isSidebarOpen ? "white" : "black"}
+                fill={isSidebarOpen ? "white" : "black"}
               />
             </button>
           )}
