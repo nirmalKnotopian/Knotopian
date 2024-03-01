@@ -165,7 +165,7 @@ export async function POST(req: NextRequest) {
       await transporter.sendMail({
         from: "emailmodo@gmail.com", // sender address
         to: r, // list of receivers
-        subject: subject || "AMP Testing For Knotopian", // Subject line
+        subject: subject || "AMP Testing For Chatlet", // Subject line
         text:
           text ||
           "There is a new article. It's about sending emails, check it out!", // plain text body
