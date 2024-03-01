@@ -4,7 +4,7 @@ const useAuthStore = create<AuthStore>((set, get) => ({
   user: {
     email: "",
     id: "",
-    isloggedin: false,
+    isloggedin: undefined,
     name: "",
   },
   setisloggedinFalse() {

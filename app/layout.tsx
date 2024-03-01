@@ -12,7 +12,7 @@ import CheckAuth from "@/HOC/checkAuth";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/firebase";
 import useAuthStore from "@/store/userAuth";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 export default function RootLayout({
   children,
@@ -28,6 +28,8 @@ export default function RootLayout({
     setuserAuth,
     setisloggedinFalse,
   } = useAuthStore();
+  const path = usePathname();
+  const protectedPaths = ["/emailResponse", "/EditDynamicEmail", "/compose"];
   const router = useRouter();
   useEffect(() => {
     return onAuthStateChanged(auth, async (user) => {
@@ -53,6 +55,19 @@ export default function RootLayout({
       }
     });
   }, []);
+  useEffect(() => {
+    if (isloggedin === undefined) return;
+    if (!isloggedin) {
+      console.log("logged in val", isloggedin);
+      console.log("Current Path", path);
+      const a = protectedPaths.some((p) => p === path);
+      if (a) {
+        console.log("router true");
+        router.replace("/auth/signin");
+      }
+    }
+  }, [isloggedin]);
+
   return (
     <html lang="en">
       <body className="w-full dark:bg-black">

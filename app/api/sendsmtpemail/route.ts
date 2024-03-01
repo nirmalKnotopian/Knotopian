@@ -1,6 +1,12 @@
 import nodemailer from "nodemailer";
 import { NextResponse, NextRequest } from "next/server";
-import { addDoc, collection, doc, getDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db } from "@/firebase";
 const { v4: uuidv4 } = require("uuid");
 
@@ -20,12 +26,18 @@ export async function POST(req: NextRequest) {
     // console.log("text", text);
     if (!q.exists()) throw "Add Some Questions To Database First";
     const EmailQuestions: string[] = q.data()?.questions as string[];
+    const firstQuestion = EmailQuestions[0];
+    const RestOfQuestion = EmailQuestions.slice(1);
+    console.log("EmailQuestions", EmailQuestions);
+    console.log("first", firstQuestion);
+    console.log("rest", RestOfQuestion);
     const emailId = uuidv4();
     await addDoc(collection(db, "emails"), {
       emailId,
       subject,
       text,
       responses: [],
+      createdAt: serverTimestamp(),
     });
     const emails = receps?.map(async (r: string) => {
       const clientChoiceEmail = `<!DOCTYPE html>
@@ -67,7 +79,7 @@ export async function POST(req: NextRequest) {
           <amp-state id="questionsState">
             <script type="application/json">
               {
-                "selectedQuestion": 0,
+                "selectedQuestion": 1,
                 "showLink":false
               }
             </script>
@@ -84,36 +96,50 @@ export async function POST(req: NextRequest) {
                   border-radius: 8px;
                   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
                 "
+              id="myform"
           >
                <amp-img  alt="logo"  width="120" 
         height="30" style="object-fit:contain;background-color:#d3d3d3" layout="fixed" src="https://knotopian.com/wp-content/uploads/2022/05/3.png" >
               </amp-img>
+            <br/>
     <input type="hidden" name="emailId" id="emailId" value="${emailId?.toString()}" />
     <input type="hidden" name="uEmail" id="uEmail" value="${r?.toString()}" />
     <input type="hidden" name="totalquestions" id="totalquestions" value="${EmailQuestions?.length.toString()}" />
-       ${EmailQuestions?.reduce((acc, q, index) => {
+    <div  [class]="questionsState.selectedQuestion == 1 ? 'show' : 'hide'" style="margin-bottom: 20px">
+      <label style="font-size: 18px; margin-bottom: 10px; color: #333">
+        ${firstQuestion}
+      </label>
+      <br />
+      <label for="q1yes">
+        <input type="radio" id="q1yes" style="background-color: #007bff;color:#007bff" name="question1" value="yes"  on="change:AMP.setState({questionsState: {showLink:true} }),myform.submit"> Yes
+      </label>
+      <label for="q1no">
+        <input type="radio" id="q1no" name="question1" value="no"  on="change:AMP.setState({questionsState: {selectedQuestion: 2}}),myform.submit"> No
+      </label>
+    </div>
+       ${RestOfQuestion?.reduce((acc, q, index) => {
          return (
            acc +
-           `<div [class]="questionsState.selectedQuestion == ${index + 1} ? 'show' : 'hide'" style="margin-bottom: 20px">
+           `<div class="hide" [class]="questionsState.selectedQuestion == ${index + 2} ? 'show' : 'hide'" style="margin-bottom: 20px">
       <label style="font-size: 18px; margin-bottom: 10px; color: #333">
         ${q}
       </label>
       <br />
-      <label for="q${index + 1}yes">
-        <input type="radio" id="q${index + 1}yes" style="background-color: #007bff;color:#007bff" name="question${index + 1}" value="yes" on="change:AMP.setState({questionsState: {showLink:true} })"> Yes
+      <label for="q${index + 2}yes">
+        <input type="radio" id="q${index + 2}yes" style="background-color: #007bff;color:#007bff" name="question${index + 2}"  value="yes" on="change:AMP.setState({questionsState: {showLink:true} }),myform.submit"> Yes
       </label>
-      <label for="q${index + 1}no">
-        <input type="radio" id="q${index + 1}no" name="question${index + 1}" value="no" on="change:AMP.setState({questionsState: {selectedQuestion: ${index + 2}} })"> No
+      <label for="q${index + 2}no">
+        <input type="radio" id="q${index + 2}no" name="question${index + 2}"  value="no" on="change:AMP.setState({questionsState: {selectedQuestion: ${index + 3}} }),myform.submit"> No
       </label>
     </div>`
          );
        }, "")}     
-       <label for="stillInterested" [class]="questionsState.selectedQuestion == ${EmailQuestions.length + 1} ? 'show' : 'hide'" style="margin-bottom: 20px">
+       <label for="stillInterested" class="hide" [class]="questionsState.selectedQuestion == ${RestOfQuestion.length + 2} ? 'show' : 'hide'" style="margin-bottom: 20px">
        <h1 style="font-size: 18px; margin-bottom: 10px; color: #333">
         Are You Still Interested In Proceeding? 
        </h1>
-       <input type="radio" id="considerLater" name="stillInterested" value="Consider Later"    > Consider Later
-       <input type="radio" id="Not Interested" name="stillInterested" value="Not Interested Anymore"   > Not Interested Anymore     
+       <input type="radio" id="considerLater" on="change:myform.submit"  name="stillInterested" value="Consider Later"    > Consider Later
+       <input type="radio" id="Not Interested"  name="stillInterested" on="change:myform.submit" value="Not Interested Anymore"   > Not Interested Anymore     
      </label>  
             <button 
                      style="

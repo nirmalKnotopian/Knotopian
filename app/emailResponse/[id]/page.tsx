@@ -1,11 +1,24 @@
 "use client";
 import DataCard from "@/components/Cards/DataCard";
+import { db } from "@/firebase";
 import useEmailProvider from "@/store/EmailProvider";
-import React from "react";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 
 function ResponseDetail() {
   const { responses } = useEmailProvider();
+  const [questions, setquestions] = useState<string[]>();
+  const [aresponses, setaresponses] = useState<string[]>();
   console.log("Page Responses", responses);
+  const getQuestions = async () => {
+    const q = await getDoc(doc(db, "emailquestions", "z8TggwoJcPiyqmKtw3dp"));
+    if (!q.exists()) throw "Add Some Questions To Database First";
+    const EmailQuestions: string[] = q.data()?.questions as string[];
+    setquestions(EmailQuestions);
+  };
+  useEffect(() => {
+    getQuestions();
+  }, []);
 
   return (
     <div>
@@ -28,47 +41,31 @@ function ResponseDetail() {
           </div>
           <div className="col-span-4 flex flex-col items-start ">
             <>
-              <h4>
-                1. Would you love to partner with KNOTOPIAN for your outsourcing
-                projects?
-              </h4>
-              <p className="text-sm text-black dark:text-white">
-                Answer: {r.response?.q1 || "No Response"}
-              </p>
-              <h4>
-                2. Trust us, you are missing a great deal already! Okay, would
-                you give us a chance to display our portfolio?
-              </h4>
-              <p className="text-sm text-black dark:text-white">
-                Answer: {r.response?.q2 || "No Response"}
-              </p>
-              <h4>
-                3. Uhm, we still don’t want to miss a chance to let you know how
-                much we can help you! After all, we have a record of creating
-                JAW-DROPPING eLearning in just 7 days! Would you want to know
-                how flexible is Knotopian’s collaboration framework?
-              </h4>
-              <p className="text-sm text-black dark:text-white">
-                Answer: {r.response?.q3 || "No Response"}
-              </p>
-              <h4>
-                4. Ouch! Give us a FEW minutes and SAVE huge! You won’t regret.
-                Just letting you know our team will be available 24x7 to
-                supporting your needs. Cool, let’s think of the partnership
-                later. But, how about a quick sync-up to just know us better?
-              </h4>
-              <p className="text-sm text-black dark:text-white">
-                Answer: {r.response?.q4 || "No Response"}
-              </p>
-              <h4>
-                5. We just WON a LearnX Gold Award for one of our innovative
-                learning solutions. Just letting you know! And yeah, we still
-                want to meet you. After all, we both work towards the same goal
-                – Creating Impactful Learning.
-              </h4>
-              <p className="text-sm text-black dark:text-white">
-                Answer: {r.response?.q5 || "No Response"}
-              </p>
+              {r.response &&
+                questions &&
+                Object.values(r.response)
+                  .slice(0, -1)
+                  .map((q, index) => (
+                    <>
+                      <h4>{questions[index]}</h4>
+                      <p className="text-sm text-black dark:text-white">
+                        Answer: {q || "No Response"}
+                      </p>
+                    </>
+                  ))}
+              {r.response && questions && (
+                <>
+                  <h4>Are You Still Interested In Proceeding?</h4>
+                  <p className="text-sm text-black dark:text-white">
+                    Answer:{" "}
+                    {
+                      Object.values(r.response)[
+                        Object.values(r.response).length - 1
+                      ]
+                    }
+                  </p>
+                </>
+              )}
             </>
           </div>
         </div>

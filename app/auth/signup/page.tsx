@@ -70,7 +70,6 @@ const SignUp: React.FC = () => {
               {/* <Link className="mb-5.5 inline-block" href="/"> */}
               <h1 className="text-3xl text-white">Chatlet</h1>
               <Image
-                className="dark:hidden"
                 src={"/images/logo/CLogo.png"}
                 alt="Logo"
                 width={300}

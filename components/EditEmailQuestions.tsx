@@ -68,7 +68,7 @@ const EditEmailQuestions = () => {
       setreload(false);
     }
   }, []);
-
+  if (isloading) return <LoaderIcon className="mx-auto h-30 w-30" />;
   return (
     <FormikProvider value={formikobj}>
       <form onSubmit={formikobj.handleSubmit}>

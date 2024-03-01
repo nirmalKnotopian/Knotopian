@@ -8,6 +8,7 @@ import {
   getDoc,
   getDocs,
   query,
+  serverTimestamp,
   setDoc,
   updateDoc,
   where,
@@ -55,6 +56,7 @@ export async function POST(req: NextRequest) {
       console.log("Updated Responses", updatedResponses);
       await updateDoc(doc(db, "emails", email.docs[0].id), {
         responses: updatedResponses,
+        updatedAt: serverTimestamp(),
       });
     } else {
       throw new Error("No Email Exists");

@@ -9,7 +9,7 @@ type User = {
   id: string;
   name: string;
   email: string;
-  isloggedin: boolean | null;
+  isloggedin: boolean | null | undefined;
 };
 //EMailResponse
 type EmailResponseList = EmailResponse[];
