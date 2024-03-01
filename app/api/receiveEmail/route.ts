@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
       const emailData = email.docs[0]?.data();
       console.log(emailData, "emailData");
       if (emailData?.responses?.length == 0) {
-        updatedResponses = responses;
+        updatedResponses = [responses];
       } else {
         updatedResponses = emailData?.responses?.map(
           (r: { response: any; userEmail: string }) => {
