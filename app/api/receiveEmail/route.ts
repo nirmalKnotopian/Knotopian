@@ -25,8 +25,11 @@ export async function POST(req: NextRequest) {
     const numQuestions = totalquestions
       ? parseInt(totalquestions as string, 10)
       : 0;
+    console.log("Total Questions", totalquestions);
     for (let i = 1; i <= numQuestions; i++) {
       const questionResponse = data.get(`question${i}`);
+      console.log("q response " + i, questionResponse);
+
       responses[`q${i}`] = questionResponse;
     }
     responses["stillInterested"] = stillInterested;
