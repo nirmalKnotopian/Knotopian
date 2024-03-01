@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
     const email = await getDocs(q);
     if (email.size > 0) {
       const emailData = email.docs[0].data();
-      const updatedResponses = emailData.responses.map(
+      const updatedResponses = emailData?.responses?.map(
         (r: { response: any; userEmail: string }) => {
           if (r.userEmail === uEmail) {
             return { ...r, response: responses };

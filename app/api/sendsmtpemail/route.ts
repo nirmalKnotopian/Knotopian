@@ -25,6 +25,7 @@ export async function POST(req: NextRequest) {
       emailId,
       subject,
       text,
+      responses: [],
     });
     const emails = receps?.map(async (r: string) => {
       const clientChoiceEmail = `<!DOCTYPE html>
@@ -66,7 +67,7 @@ export async function POST(req: NextRequest) {
           <amp-state id="questionsState">
             <script type="application/json">
               {
-                "selectedQuestion": 1,
+                "selectedQuestion": 0,
                 "showLink":false
               }
             </script>
@@ -89,25 +90,28 @@ export async function POST(req: NextRequest) {
               </amp-img>
     <input type="hidden" name="emailId" id="emailId" value="${emailId?.toString()}" />
     <input type="hidden" name="uEmail" id="uEmail" value="${r?.toString()}" />
-    <input type="hidden" name="totalquestions" id="uEmail" value="${EmailQuestions?.length.toString()}" />
-       ${EmailQuestions?.map(
-         (
-           q,
-           index,
-         ) => ` <div [class]="questionsState.selectedQuestion == ${index + 1} ? 'show' : 'hide'" style="margin-bottom: 20px">
-       <label style="font-size: 18px; margin-bottom: 10px; color: #333">
-         ${q}
-       </label>
-       <br />
-       <label for="q${index + 1}yes">
-         <input type="radio" id="q${index + 1}yes" style="background-color: #007bff;color:#007bff" name="question${index + 1}" value="yes" on="change:AMP.setState({questionsState: {showLink:true} })"> Yes
-       </label>
-       <label for="q${index + 1}no">
-         <input type="radio" id="q${index + 1}no" name="question${index + 1}" value="no" on="change:AMP.setState({questionsState: {selectedQuestion: ${index + 2}} })"> No
-       </label>
-     </div>`,
-       )}     
-       <label for="stillInterested">
+    <input type="hidden" name="totalquestions" id="totalquestions" value="${EmailQuestions?.length.toString()}" />
+       ${EmailQuestions?.reduce((acc, q, index) => {
+         return (
+           acc +
+           `<div [class]="questionsState.selectedQuestion == ${index + 1} ? 'show' : 'hide'" style="margin-bottom: 20px">
+      <label style="font-size: 18px; margin-bottom: 10px; color: #333">
+        ${q}
+      </label>
+      <br />
+      <label for="q${index + 1}yes">
+        <input type="radio" id="q${index + 1}yes" style="background-color: #007bff;color:#007bff" name="question${index + 1}" value="yes" on="change:AMP.setState({questionsState: {showLink:true} })"> Yes
+      </label>
+      <label for="q${index + 1}no">
+        <input type="radio" id="q${index + 1}no" name="question${index + 1}" value="no" on="change:AMP.setState({questionsState: {selectedQuestion: ${index + 2}} })"> No
+      </label>
+    </div>`
+         );
+       }, "")}     
+       <label for="stillInterested" [class]="questionsState.selectedQuestion == ${EmailQuestions.length + 1} ? 'show' : 'hide'" style="margin-bottom: 20px">
+       <h1 style="font-size: 18px; margin-bottom: 10px; color: #333">
+        Are You Still Interested In Proceeding? 
+       </h1>
        <input type="radio" id="considerLater" name="stillInterested" value="Consider Later"    > Consider Later
        <input type="radio" id="Not Interested" name="stillInterested" value="Not Interested Anymore"   > Not Interested Anymore     
      </label>  
