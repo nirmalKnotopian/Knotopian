@@ -33,7 +33,8 @@ export async function POST(req: NextRequest) {
     const q = query(collection(db, "emails"), and(where("emailId", "==", eid)));
     const email = await getDocs(q);
     if (email.size > 0) {
-      const emailData = email.docs[0].data();
+      const emailData = email.docs[0]?.data();
+      console.log(emailData, "emailData");
       const updatedResponses = emailData?.responses?.map(
         (r: { response: any; userEmail: string }) => {
           if (r.userEmail === uEmail) {
