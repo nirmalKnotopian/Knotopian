@@ -70,6 +70,25 @@ export async function POST(req: NextRequest) {
             .show {
               display: block;
             }
+            input[type="radio"] {
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              appearance: none;
+              width: 16px;
+              height: 16px;
+              border: 2px solid #333;
+              border-radius: 50%;
+              outline: none;
+              cursor: pointer;
+                background-color:blue;
+            }
+            
+            /* Customize the appearance of the checked state */
+            input[type="radio"]:checked {
+              background-color: yellow; /* Change to your desired color */
+              border-color: blue; /* Change to your desired color */
+            }
+
           </style>
         </head>
         <body style="
@@ -101,7 +120,7 @@ export async function POST(req: NextRequest) {
                <amp-img  alt="logo"  width="120" 
         height="30" style="object-fit:contain;background-color:#d3d3d3" layout="fixed" src="https://knotopian.com/wp-content/uploads/2022/05/3.png" >
               </amp-img>
-          <p style="font-weight:500">
+          <p style="font-weight:500;letter-spacing:0.4px;">
               We are a fastest growing eLearning production company with innovation as our core value. We design and develop custom learning solutions for the organizations, educational institutions, and NGOs. Our team is passionate about designing innovative eLearning strategies and solutions that concentrate on enhancing the workforce’s skills, attitudes, and efficiency and thereby producing measurable results with return on investment.
             </p>
             <br/>
@@ -113,10 +132,10 @@ export async function POST(req: NextRequest) {
         ${firstQuestion}
       </label>
       <br />
-      <label for="q1yes" style="display:block;">
+      <label for="q1yes" style="display:flex;align-items:center;">
         <input type="radio" id="q1yes" style="background-color: #007bff;color:#007bff" name="question1" value="yes"  on="change:AMP.setState({questionsState: {showLink:true} }),myform.submit"> Yes
       </label>
-      <label for="q1no" style="display:block;">
+      <label for="q1no" style="display:flex;align-items:center;">
         <input type="radio" id="q1no" name="question1" value="no"  on="change:AMP.setState({questionsState: {selectedQuestion: 2,showLink:false}}),myform.submit"> No
       </label>
     </div>
