@@ -101,20 +101,23 @@ export async function POST(req: NextRequest) {
                <amp-img  alt="logo"  width="120" 
         height="30" style="object-fit:contain;background-color:#d3d3d3" layout="fixed" src="https://knotopian.com/wp-content/uploads/2022/05/3.png" >
               </amp-img>
+          <p style="font-weight:500">
+              We are a fastest growing eLearning production company with innovation as our core value. We design and develop custom learning solutions for the organizations, educational institutions, and NGOs. Our team is passionate about designing innovative eLearning strategies and solutions that concentrate on enhancing the workforce’s skills, attitudes, and efficiency and thereby producing measurable results with return on investment.
+            </p>
             <br/>
     <input type="hidden" name="emailId" id="emailId" value="${emailId?.toString()}" />
     <input type="hidden" name="uEmail" id="uEmail" value="${r?.toString()}" />
     <input type="hidden" name="totalquestions" id="totalquestions" value="${EmailQuestions?.length.toString()}" />
     <div  [class]="questionsState.selectedQuestion == 1 ? 'show' : 'hide'" style="margin-bottom: 20px">
-      <label style="font-size: 18px; margin-bottom: 10px; color: #333">
+      <label style="font-size: 18px; margin-bottom: 10px; color: #333;font-weight:600;">
         ${firstQuestion}
       </label>
       <br />
-      <label for="q1yes">
+      <label for="q1yes" style="display:block;">
         <input type="radio" id="q1yes" style="background-color: #007bff;color:#007bff" name="question1" value="yes"  on="change:AMP.setState({questionsState: {showLink:true} }),myform.submit"> Yes
       </label>
-      <label for="q1no">
-        <input type="radio" id="q1no" name="question1" value="no"  on="change:AMP.setState({questionsState: {selectedQuestion: 2}}),myform.submit"> No
+      <label for="q1no" style="display:block;">
+        <input type="radio" id="q1no" name="question1" value="no"  on="change:AMP.setState({questionsState: {selectedQuestion: 2,showLink:false}}),myform.submit"> No
       </label>
     </div>
        ${RestOfQuestion?.reduce((acc, q, index) => {
@@ -129,7 +132,7 @@ export async function POST(req: NextRequest) {
         <input type="radio" id="q${index + 2}yes" style="background-color: #007bff;color:#007bff" name="question${index + 2}"  value="yes" on="change:AMP.setState({questionsState: {showLink:true} }),myform.submit"> Yes
       </label>
       <label for="q${index + 2}no">
-        <input type="radio" id="q${index + 2}no" name="question${index + 2}"  value="no" on="change:AMP.setState({questionsState: {selectedQuestion: ${index + 3}} }),myform.submit"> No
+        <input type="radio" id="q${index + 2}no" name="question${index + 2}"  value="no" on="change:AMP.setState({questionsState: {selectedQuestion: ${index + 3},showLink:false} }),myform.submit"> No
       </label>
     </div>`
          );
