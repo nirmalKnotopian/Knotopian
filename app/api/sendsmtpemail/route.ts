@@ -284,42 +284,40 @@ export async function POST(req: NextRequest) {
      <input type="hidden" name="emailId" id="emailId" value="${emailId?.toString()}" />
      <input type="hidden" name="uEmail" id="uEmail" value="${r?.toString()}" />
      <input type="hidden" name="totalquestions" id="totalquestions" value="${EmailQuestions?.length.toString()}" />
+    
      <div style="margin-bottom: 20px">
-       <label style="font-size: 18px; margin-bottom: 10px; color: #333;font-weight:600;">
-         ${firstQuestion}
-       </label>
-       <label for="q1yes" style="display:flex;align-items:center;margin-top:4px;margin-bottom:4px;">
-       <input type="radio" id="q1yes"  name="question1" value="yes" > Yes
-      </label>
-         <label for="q1no" style="display:flex;align-items:center;margin-top:4px;margin-bottom:4px;">
-       <input type="radio" id="q1no" name="question1" value="no" > No
-     </label>
-     <h5 style="font-size: 14px; color: #555; margin-bottom: 15px">
-     If Yes Use the calendar to set up a quick sync-up at your convenience to
-     discuss further.
-      </h5>
-
-     <button 
-     style="
-    background-color: #E4D00A;
-    color: #fff;
-    border: none;
-    padding: 8px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top:10px;
-  "
-    >
-<a    href="https://calendly.com/noumansajid95/meeting-test" target="_blank" style="text-decoration:none;color:#fff" >Schedule A Meeting</a>
-
-</button>
-     <br />
-
-       <br />
-      
+                      <label style="font-size: 18px; margin-bottom: 10px; color: #333;font-weight:600;">
+                    ${firstQuestion}
+                  </label>
+                  <br />
+                  <label for="q1yes" style="display:flex;align-items:center;margin-top:4px;margin-bottom:4px;">
+                  <input type="radio" id="q1yes"  name="question1"  value="yes"> Yes
+                </label>
+                <label for="q1no" style="display:flex;align-items:center;margin-top:4px;margin-bottom:4px;">
+                  <input type="radio" id="q1no" name="question1"  value="no"> No
+                </label>
+                  <h5 style="font-size: 14px; color: #555; margin-bottom: 15px">
+                  If Yes Use the calendar to set up a quick sync-up at your convenience to
+                  discuss further.
+                    </h5>
+      <button 
+                    style="
+                   background-color: #E4D00A;
+                   color: #fff;
+                   border: none;
+                   padding: 8px 20px;
+                   font-size: 16px;
+                   cursor: pointer;
+                   border-radius: 4px;
+                   margin-top:10px;
+                 "
+                   >
+           <a    href="https://calendly.com/noumansajid95/meeting-test" target="_blank" style="text-decoration:none;color:#fff" >Schedule A Meeting</a>
+             
+           </button> 
    
-     </div>
+           </div>
+           <hr/>
         ${RestOfQuestion?.reduce((acc, q, index) => {
           return (
             acc +
@@ -355,7 +353,10 @@ export async function POST(req: NextRequest) {
            </button>
            
                   
-                </div>`
+                </div>
+           <hr/>
+                
+                `
           );
         }, "")}     
         <label for="stillInterested" style="margin-bottom: 20px">
