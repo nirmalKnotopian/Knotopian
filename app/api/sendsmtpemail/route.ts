@@ -13,8 +13,8 @@ const { v4: uuidv4 } = require("uuid");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "boostmysitesleads@gmail.com",
-    pass: "xvau xttv raeb lfhf",
+    user: "nirmal@knotopian.com",
+    pass: "fqsw ikax hkrs irwr",
   },
 });
 
