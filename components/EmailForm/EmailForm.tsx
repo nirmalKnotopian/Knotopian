@@ -40,7 +40,7 @@ function EmailForm() {
         });
         setisSendingEmail(true);
         // console.log(emailList);
-        // await sendEmail(values.subject, values.message);
+        await sendEmail(values.subject, values.message);
         // formikHelpers.resetForm();
         toast.success("Email Sent Succesfully");
       } catch (e) {
