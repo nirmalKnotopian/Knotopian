@@ -7,30 +7,40 @@ import { toast } from "react-toastify";
 import { useFormStatus } from "react-dom";
 import Loader from "../common/Loader";
 import ButtonLoader from "../ButtonLoader";
+import userPersistenceDate from "@/store/EmailPersistence";
+
 const validationSchema = yup.object().shape({
   // receivers: yup.array().min(1, "Enter Atleast One Email").of(yup.string()),
   subject: yup.string().required("Subject is Required"),
   message: yup.string().min(10),
 });
 function EmailForm() {
+  const { message, recepients, setData, subject } = userPersistenceDate();
+  console.log("Persistent Data", message, recepients, subject);
   const [emailInput, setEmailInput] = useState<string>("");
-  const [emailList, setEmailList] = useState<string[]>([]);
+  const [emailList, setEmailList] = useState<string[]>(recepients);
   const [isSendingEmail, setisSendingEmail] = useState<boolean>(false);
   const formikObj = useFormik({
     validationSchema,
     initialValues: {
       // receivers: emailList,
-      subject: "",
-      message: "",
+      subject,
+      message,
     },
     async onSubmit(values, formikHelpers) {
       try {
-        if(emailList.length<=0) {
-          toast.error("Add Some Recepients First")
-          return;}
+        if (emailList.length <= 0) {
+          toast.error("Add Some Recepients First");
+          return;
+        }
+        setData({
+          message: values.message,
+          recepients: emailList,
+          subject: values.subject,
+        });
         setisSendingEmail(true);
-        console.log(emailList);
-        await sendEmail(values.subject, values.message);
+        // console.log(emailList);
+        // await sendEmail(values.subject, values.message);
         // formikHelpers.resetForm();
         toast.success("Email Sent Succesfully");
       } catch (e) {

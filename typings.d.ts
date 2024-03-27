@@ -36,3 +36,12 @@ type UserEmailProvider = {
   responses: UserResponse[];
   setResponses: (r: UserResponse[]) => void;
 };
+
+type PersistenceDataProps = {
+  recepients: Array<string>;
+  subject: string;
+  message: string;
+};
+type PersistenceData = PersistenceDataProps & {
+  setData: (j: PersistenceDataProps) => void;
+};

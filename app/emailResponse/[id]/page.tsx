@@ -30,45 +30,55 @@ function ResponseDetail() {
           <p className="font-medium">Message</p>
         </div>
       </div>
-      {!responses && <p>No Replies To This Email</p>}
-      {responses?.map((r) => (
+      {!responses && <p className="text-center">No Replies To This Email</p>}
+      {responses?.map((r, responseIndex) => (
         <div
-          className="grid max-h-65 grid-cols-6 overflow-auto border-t border-stroke px-4 py-4.5 dark:border-strokedark md:px-6 2xl:px-7.5"
-          key={Math.random() * 100000}
+          className="grid max-h-96 grid-cols-6 overflow-auto border-t border-stroke px-4 py-4.5 dark:border-strokedark md:px-6 2xl:px-7.5"
+          key={responseIndex}
         >
           <div className="col-span-2 flex items-start">
-            <p className="text-sm text-black dark:text-white">{r.userEmail}</p>
+            <p className="text-sm font-medium text-black dark:text-white">
+              {r.userEmail}
+            </p>
           </div>
-          <div className="col-span-4 flex flex-col items-start ">
-            <>
-              {r.response &&
-                questions &&
-                Object.entries(r.response)
-                  .filter(([key]) => key !== "stillInterested")
-                  .map((q, index) => {
-                    console.log(q, index);
-                    if (questions[q[0][1] as unknown as number]) {
-                      return (
-                        <>
-                          <h4>{questions[q[0][1] as unknown as number]}</h4>
-                          <p className="text-sm text-black dark:text-white">
-                            Answer: {q[1] || "No Response"}
-                          </p>
-                        </>
-                      );
-                    } else {
-                      return null;
-                    }
-                  })}
-              {r.response && questions && (
-                <>
-                  <h4>Are You Still Interested In Proceeding?</h4>
-                  <p className="text-sm text-black dark:text-white">
-                    Answer: {r.response["stillInterested"]}
-                  </p>
-                </>
-              )}
-            </>
+          <div className="col-span-4 flex flex-col items-start">
+            {r.response &&
+              questions &&
+              Object.entries(r.response)
+                .filter(([key]) => key !== "stillInterested")
+                .map((q, index) => {
+                  if (questions[q[0][1] as unknown as number]) {
+                    return (
+                      <div key={index} className="mb-4 w-full">
+                        <h4 className="mb-1 text-lg font-semibold text-black dark:text-slate-400">
+                          {questions[q[0][1] as unknown as number]}
+                        </h4>
+                        <p className="text-sm text-black dark:text-white">
+                          Answer:{" "}
+                          <span className="font-semibold">
+                            {q[1] || "No Response"}
+                          </span>
+                        </p>
+                        <hr className="w-full my-3" />
+                      </div>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+            {r.response && questions && (
+              <div className="mb-4">
+                <h4 className="mb-1 text-lg font-semibold text-black dark:text-white">
+                  Are You Still Interested In Proceeding?
+                </h4>
+                <p className="text-sm text-black dark:text-white">
+                  Answer:{" "}
+                  <span className="font-semibold">
+                    {r.response["stillInterested"]}
+                  </span>
+                </p>
+              </div>
+            )}
           </div>
         </div>
       ))}

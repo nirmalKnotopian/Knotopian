@@ -7,8 +7,17 @@ import { revalidateEmailsPath } from "../serverActions/revalidate";
 function Deletebutton({ id }: { id: string }) {
   const deleteEmail = async () => {
     try {
-      await deleteDoc(doc(db, "emails", id));
-      toast.success("Deleted");
+      const toastId = toast.promise(
+        new Promise(async (resolve, reject) => {
+          await deleteDoc(doc(db, "emails", id));
+          resolve("Success");
+        }),
+        {
+          pending: "Deleting...",
+          success: "Deleted successfully",
+          error: "Failed to delete",
+        },
+      );
       revalidateEmailsPath();
     } catch (e) {
       console.log(e);

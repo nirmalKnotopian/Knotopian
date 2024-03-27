@@ -86,9 +86,13 @@ const Sidebar = ({}: SidebarProps) => {
       </div>
       {/* <!-- SIDEBAR HEADER --> */}
 
-      <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
+      <div
+        className={`no-scrollbar flex h-full flex-col items-start justify-between overflow-y-auto duration-300 ease-linear ${isSidebarOpen ? "" : ""}`}
+      >
         {/* <!-- Sidebar Menu --> */}
-        <nav className="px-4 py-4  lg:px-6">
+        <nav
+          className={`px-4 py-4  lg:px-6  ${!isSidebarOpen ? "px-0 lg:px-0" : ""}`}
+        >
           {/* <!-- Menu Group --> */}
           <div>
             <ul
@@ -183,49 +187,13 @@ const Sidebar = ({}: SidebarProps) => {
                 <LogOutIcon />
                 Sign Out
               </li>
-
-              {/* <!-- Menu Item Chart --> */}
-
-              {/* <!-- Menu Item Ui Elements --> */}
-
-              {/* <!-- Dropdown Menu Start --> */}
-              {/* <li>
-                <ExpandMenu icon={<Component className="h-6 w-6" />} name="UI">
-                  <LinkItem
-                    title="Alerts"
-                    href="/ui/alerts"
-                    icon={<AlertCircle className="h-5 w-5" />}
-                  ></LinkItem>
-                  <LinkItem
-                    title="Buttons"
-                    href="/ui/buttons"
-                    icon={<MousePointerClick className="h-5 w-5" />}
-                  />
-                </ExpandMenu>
-              </li> */}
-
-              {/* <!-- Menu Item Ui Elements --> */}
-
-              {/* <!-- Menu Item Auth Pages --> */}
-              {/* <li>
-                <ExpandMenu name="Auth" icon={<LampIcon className="h-6 w-6" />}>
-                  <LinkItem
-                    title="Sign In"
-                    href="/auth/signin"
-                    icon={<LockIcon className="h-5 w-5" />}
-                  ></LinkItem>
-                  <LinkItem
-                    title="Sign up"
-                    href="/auth/signup"
-                    icon={<SignalHigh className="h-5 w-5" />}
-                  ></LinkItem>
-                </ExpandMenu>
-              </li> */}
-
-              {/* <!-- Menu Item Auth Pages --> */}
             </ul>
           </div>
         </nav>
+        <div className="flex w-full justify-center py-6">
+          <h1 className="text-center"> Powered By Iris Ai Innovations</h1>
+        </div>
+
         {/* <!-- Sidebar Menu --> */}
       </div>
     </aside>
