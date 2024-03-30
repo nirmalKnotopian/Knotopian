@@ -68,7 +68,9 @@ function ResponseDetail() {
               Object.entries(r.response)
                 .filter(([key]) => key !== "stillInterested")
                 .map((q, index) => {
-                  if (questions[q[0][1] as unknown as number]) {
+                  console.log(q[0][1], "questin");
+                  console.log("qs", q[0]);
+                  if (questions[(q[0][1] as unknown as number) - 1]) {
                     return (
                       <div key={index} className="mb-4 w-full">
                         <h4 className="mb-1 text-lg font-semibold text-black dark:text-slate-400">
@@ -84,7 +86,7 @@ function ResponseDetail() {
                       </div>
                     );
                   } else {
-                    return null
+                    return null;
                   }
                 })}
             {r.response && questions && (
