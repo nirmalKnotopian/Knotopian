@@ -1014,8 +1014,8 @@ export async function POST(req: NextRequest) {
         text:
           text ||
           "There is a new article. It's about sending emails, check it out!", // plain text body
-        amp: AmpHTMLForGmail, // html body
-        html: GmailplainHTML,
+        amp: AmpHTML, // html body
+        html: plainHTML,
       });
     });
     await Promise.all(emails);

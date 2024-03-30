@@ -6,7 +6,7 @@ const userPersistenceDate = create<PersistenceData>((set, get) => ({
   message: "",
   setData: (newData) => {
     set((state) => {
-        console.log("eb",newData)
+      console.log("eb", newData);
       return { ...state, ...newData };
     });
   },

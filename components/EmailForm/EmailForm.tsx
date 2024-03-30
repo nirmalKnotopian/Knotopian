@@ -51,7 +51,15 @@ function EmailForm() {
     },
   });
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmailInput(event.target?.value);
+    if (event.target.name === "recepients") {
+      setEmailInput(event.target?.value);
+    } else if (event.target.name === "subject") {
+      formikObj.handleChange(event);
+      setData({ message, recepients, subject: event.target.value });
+    } else if (event.target.name === "message") {
+      formikObj.handleChange(event);
+      setData({ message: event.target.value, subject, recepients });
+    }
   };
 
   const handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -66,6 +74,7 @@ function EmailForm() {
 
     if (trimmedEmail && isValidEmail(trimmedEmail)) {
       setEmailList([...emailList, trimmedEmail]);
+      setData({ message, recepients: [...emailList, trimmedEmail], subject });
       setEmailInput("");
     }
   };
@@ -120,6 +129,7 @@ function EmailForm() {
       reader.readAsText(file);
     }
   };
+
   return (
     <FormikProvider value={formikObj}>
       <div className="flex flex-col gap-9">
@@ -174,6 +184,7 @@ function EmailForm() {
                 placeholder="Enter email addresses"
                 value={emailInput}
                 onChange={(e) => handleInputChange(e)}
+                name="recepients"
                 onKeyDown={(e) => handleInputKeyDown(e)}
                 className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
               />
@@ -185,6 +196,7 @@ function EmailForm() {
                   name="subject"
                   type="text"
                   placeholder="Select subject"
+                  onChange={handleInputChange}
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
                 <ErrorMessage
@@ -235,6 +247,7 @@ function EmailForm() {
                   as="textarea"
                   name="message"
                   rows={6}
+                  onChange={handleInputChange}
                   placeholder="Type your message"
                   className="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 />
