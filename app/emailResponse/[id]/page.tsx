@@ -68,7 +68,6 @@ function ResponseDetail() {
               Object.entries(r.response)
                 .filter(([key]) => key !== "stillInterested")
                 .map((q, index) => {
-                  console.log(q, "q");
                   if (questions[q[0][1] as unknown as number]) {
                     return (
                       <div key={index} className="mb-4 w-full">
@@ -85,9 +84,7 @@ function ResponseDetail() {
                       </div>
                     );
                   } else {
-                    return (
-                      <p className="text-center">No Replies To This Email</p>
-                    );
+                    return null
                   }
                 })}
             {r.response && questions && (

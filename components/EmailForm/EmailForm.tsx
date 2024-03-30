@@ -139,7 +139,7 @@ function EmailForm() {
             <h3 className="font-medium text-black dark:text-white">
               Compose Email
             </h3>
-            <h3>Import Email List</h3>
+            <h3>Import Email List (Import File In .txt Format)</h3>
             <input
               placeholder="Import Emails"
               type="file"
