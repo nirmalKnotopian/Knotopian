@@ -38,10 +38,10 @@ export default function RootLayout({
         if (user) {
           console.log("Logged In");
           setuserAuth({
-            id: user.uid,
-            email: user.email!,
+            id: user.uid || "",
+            email: user.email! || "",
             isloggedin: true,
-            name: user.displayName!,
+            name: user.displayName! || "",
           });
           setisloggedinTrue();
         } else {

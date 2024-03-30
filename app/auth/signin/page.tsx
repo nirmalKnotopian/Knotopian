@@ -50,13 +50,13 @@ const SignIn: React.FC = () => {
           passwordRef.current?.value!,
         );
 
-        const user = await getDoc(doc(db, "users", u.user.uid));
+        // const user = await getDoc(doc(db, "users", u.user.uid));
         toast.success("Signed In");
         setuserAuth({
-          email: user.data()?.email!,
-          id: user.id,
+          email: u.user.email!,
+          id: u.user.uid!,
           isloggedin: true,
-          name: user.data()?.name!,
+          name: u.user.displayName || "",
         });
         router.replace("/");
       } catch (e) {
