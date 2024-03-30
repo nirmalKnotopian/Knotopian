@@ -48,7 +48,9 @@ function ResponseDetail() {
           <p className="font-medium">Message</p>
         </div>
       </div>
-      {!responses && <p className="text-center">No Replies To This Email</p>}
+      {responses.length <= 0 && (
+        <p className="text-center my-10">No Replies To This Email</p>
+      )}
       {responses?.map((r, responseIndex) => (
         <div
           className="grid max-h-96 grid-cols-6 overflow-auto border-t border-stroke px-4 py-4.5 dark:border-strokedark md:px-6 2xl:px-7.5"
@@ -82,7 +84,9 @@ function ResponseDetail() {
                       </div>
                     );
                   } else {
-                    return null;
+                    return (
+                      <p className="text-center">No Replies To This Email</p>
+                    );
                   }
                 })}
             {r.response && questions && (
