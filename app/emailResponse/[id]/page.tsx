@@ -4,6 +4,7 @@ import { db } from "@/firebase";
 import useEmailProvider from "@/store/EmailProvider";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 function ResponseDetail() {
   const { responses } = useEmailProvider();
@@ -11,10 +12,27 @@ function ResponseDetail() {
   const [aresponses, setaresponses] = useState<string[]>();
   console.log("Page Responses", responses);
   const getQuestions = async () => {
-    const q = await getDoc(doc(db, "emailquestions", "z8TggwoJcPiyqmKtw3dp"));
-    if (!q.exists()) throw "Add Some Questions To Database First";
-    const EmailQuestions: string[] = q.data()?.questions as string[];
-    setquestions(EmailQuestions);
+    try {
+      const toastId = toast.promise(
+        new Promise(async (resolve, reject) => {
+          const q = await getDoc(
+            doc(db, "emailquestions", "z8TggwoJcPiyqmKtw3dp"),
+          );
+          if (!q.exists()) throw "Add Some Questions To Database First";
+          const EmailQuestions: string[] = q.data()?.questions as string[];
+          setquestions(EmailQuestions);
+          resolve("Success");
+        }),
+        {
+          pending: "Fetching Responses... ",
+          success: "Fetched successfully",
+          error: "Failed to Fethced Data",
+        },
+      );
+    } catch (e) {
+      console.log(e);
+      toast.error("Add Some Questions To Database First");
+    }
   };
   useEffect(() => {
     getQuestions();
