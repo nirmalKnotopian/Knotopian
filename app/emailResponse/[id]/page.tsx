@@ -13,6 +13,7 @@ function ResponseDetail() {
   console.log("Page Responses", responses);
   const getQuestions = async () => {
     try {
+      if (responses.length == 0) return;
       const toastId = toast.promise(
         new Promise(async (resolve, reject) => {
           const q = await getDoc(
@@ -49,7 +50,7 @@ function ResponseDetail() {
         </div>
       </div>
       {responses.length <= 0 && (
-        <p className="text-center my-10">No Replies To This Email</p>
+        <p className="my-10 text-center">No Replies To This Email</p>
       )}
       {responses?.map((r, responseIndex) => (
         <div
