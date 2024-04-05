@@ -410,7 +410,6 @@ export async function POST(req: NextRequest) {
             custom-element="amp-form"
             src="https://cdn.ampproject.org/v0/amp-form-0.1.js"
           ></script>
-          <script async custom-template="amp-mustache" src="https://cdn.ampproject.org/v0/amp-mustache-0.2.js"></script>
           <script
             async
             custom-element="amp-bind"
@@ -436,11 +435,11 @@ export async function POST(req: NextRequest) {
               appearance: none;
               width: 16px;
               height: 16px;
-              border: 2px solid #333;
+              border: 2px solid #0fa3d6;
               border-radius: 50%;
               outline: none;
               cursor: pointer;
-              background-color:blue;
+              background-color:#00224d;
             }
             
         
@@ -453,7 +452,9 @@ export async function POST(req: NextRequest) {
         </head>
         <body style="
               padding : 20px 10px; 
-                     background-color:blue;
+                     background-size:cover;
+                     background-repeat:no-repeat;
+              background-image: url('https://firebasestorage.googleapis.com/v0/b/chatlet-5761f.appspot.com/o/bg.png?alt=media&token=5514b977-b132-4ade-8702-35f0832358eb');
                      ">
           <amp-state id="questionsState">
             <script type="application/json">
@@ -461,34 +462,36 @@ export async function POST(req: NextRequest) {
                 "selectedQuestion": 1,
                 "showLink":false
               }
-            </script>
+            </script> 
           </amp-state>
           
           <form
             action-xhr="https://emailmodo.vercel.app/api/receiveEmail"
             method="POST"
                       style="
-                  max-width: 600px; 
+                  max-width: 700px; 
                   margin: 0 auto; 
-                  background-color: #fff;
-                  padding: 20px;
-                  border-radius: 8px;
+                  background-color: #02304a;
+                  padding:10px 60px 40px 60px;
+                  border-radius: 28px;
                   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+               color:#fbfcfc;
+                position:relative
                 "
               id="myform"
           >
-               <amp-img  alt="logo"  width="120" 
-        height="30" style="object-fit:contain;background-color:#d3d3d3" layout="fixed" src="https://knotopian.com/wp-content/uploads/2022/05/3.png" >
+               <amp-img  alt="logo"  width="280" 
+        height="80" style="object-fit:contain;"  layout="flex-item" src="https://firebasestorage.googleapis.com/v0/b/chatlet-5761f.appspot.com/o/logo.png?alt=media&token=1c888db1-221b-41ba-9b03-a750fb2834d6" >
               </amp-img> 
-          <p style="font-weight:500;letter-spacing:0.4px;">
+          <p style="font-weight:500;letter-spacing:1px;">
               We are a fastest growing eLearning production company with innovation as our core value. We design and develop custom learning solutions for the organizations, educational institutions, and NGOs. Our team is passionate about designing innovative eLearning strategies and solutions that concentrate on enhancing the workforce’s skills, attitudes, and efficiency and thereby producing measurable results with return on investment.
             </p>
-            <hr/>
+            <hr style="border:1px solid #0a455e"/>
 
-            <br/>
+            <br />
 
     <div  [class]="questionsState.selectedQuestion == 1 ? 'show' : 'hide'" style="margin-bottom: 20px">
-      <label style="font-size: 18px; margin-bottom: 10px; color: #333;font-weight:600;">
+      <label style="font-size: 18px; margin-bottom: 10px;  color:#fbfcfc;font-weight:600;">
       1. Would you love to partner with KNOTOPIAN for your outsourcing projects?
       </label>
       <br />
@@ -500,7 +503,7 @@ export async function POST(req: NextRequest) {
       </label>
     </div>
     <div class="hide"   [class]="questionsState.selectedQuestion == 2 ? 'show' : 'hide'" style="margin-bottom: 20px">
-    <label style="font-size: 18px; margin-bottom: 10px; color: #333;font-weight:600;">
+    <label style="font-size: 18px; margin-bottom: 10px;color:#fbfcfc;font-weight:600;">
     2. Trust us, you are missing a great deal already! Okay, would you give us
     a chance to display our portfolio?
     </label>
@@ -513,7 +516,7 @@ export async function POST(req: NextRequest) {
     </label>
   </div>
   <div class="hide"  [class]="questionsState.selectedQuestion == 3 ? 'show' : 'hide'" style="margin-bottom: 20px">
-    <label style="font-size: 18px; margin-bottom: 10px; color: #333;font-weight:600;">
+    <label style="font-size: 18px; margin-bottom: 10px;  color:#f2f3f4;font-weight:600;">
     3. Uhm, we still don’t want to miss a chance to let you know how much we
              can help you! After all, we have a record of creating JAW-DROPPING
              eLearning in just 7 days! Would you want to know how flexible is
@@ -528,7 +531,7 @@ export async function POST(req: NextRequest) {
     </label>
   </div>
   <div class="hide"  [class]="questionsState.selectedQuestion == 4 ? 'show' : 'hide'" style="margin-bottom: 20px">
-    <label style="font-size: 18px; margin-bottom: 10px; color: #333;font-weight:600;">
+    <label style="font-size: 18px; margin-bottom: 10px;  color:#f2f3f4;font-weight:600;">
     4. Ouch! Give us a FEW minutes and SAVE huge! You won’t regret. Just
     letting you know our team will be available 24x7 to supporting your needs.
     Cool, let’s think of the partnership later. But, how about a quick sync-up
@@ -543,7 +546,7 @@ export async function POST(req: NextRequest) {
     </label>
   </div>
   <div class="hide"  [class]="questionsState.selectedQuestion == 5? 'show' : 'hide'" style="margin-bottom: 20px">
-    <label style="font-size: 18px; margin-bottom: 10px; color: #333;font-weight:600;">
+    <label style="font-size: 18px; margin-bottom: 10px;  color:#f2f3f4;font-weight:600;">
     5. We just WON a LearnX Gold Award for one of our innovative learning
              solutions. Just letting you know! And yeah, we still want to meet you.
              After all, we both work towards the same goal – Creating Impactful
@@ -557,27 +560,35 @@ export async function POST(req: NextRequest) {
       <input type="radio" id="q5no" name="question5" value="no"  on="change:AMP.setState({questionsState: {selectedQuestion: 5,showLink:false}}),myform.submit"> No
     </label>
   </div>
-        
-      
-            <button 
+      <div      hidden [hidden]="questionsState.showLink==false" style="padding:8px 4px 15px 10px;display:flex;flex-direction:row; justify-content:space-around;align-items:center;background-color:#052438;border-radius:20px;gap:15px;width:97%;margin:auto;">
+           <button 
                      style="
                     background-color: #E4D00A;
-                    color: #fff;
+                    color:#fed11a
                     border: none;
-                    padding: 8px 20px;
                     font-size: 16px;
                     cursor: pointer;
-                    border-radius: 4px;
+                    border-radius: 20px;
                     margin-top:10px;
+                            padding:5px 8px;
+                            width:40%
                   "
                     hidden [hidden]="questionsState.showLink==false"
                     >
-            <a    href="https://calendly.com/noumansajid95/meeting-test" target="_blank" style="text-decoration:none;color:#fff" >Schedule A Meeting</a>
+            <a    href="https://calendly.com/noumansajid95/meeting-test" target="_blank" style="text-decoration:none;color:black;font-weight:800" >Schedule A Meeting</a>
               
             </button>
-            <p  hidden [hidden]="questionsState.showLink==false">
+          <div style=" border-left: 2px solid green;
+                            width:40%
+                      
+  height: 45px;"></div>
+            <p  hidden [hidden]="questionsState.showLink==false" style="letter-spacing:1px">
               Use the calendar to set up a quick sync-up at your convenience to discuss further.
             </p>
+          
+            </div>
+      
+           
            <br/> <button
            hidden
                         style="
@@ -591,22 +602,8 @@ export async function POST(req: NextRequest) {
                     margin-top:10px;
                   "
                     type="submit">Submit</button>
-             <div submit-success
-                  style="padding:4px"
-                  >
-          <template type="amp-mustache">
-            <p style="color:green;">
-           Success!.
-            </p>
-          </template>
-        </div>
-        <div submit-error style="padding:4px">
-          <template type="amp-mustache" >
-            <p style="color:red;">
-            Error! Please Try Again
-            </p>
-          </template>
-        </div>
+          
+       
           </form>
         </body>
       </html>`;
