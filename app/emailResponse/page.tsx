@@ -19,12 +19,17 @@ import {
   unstable_cache,
   unstable_noStore as nostore,
 } from "next/cache";
+import { Timestamp } from "firebase/firestore";
 const getEmails = async () => {
   try {
     const emails = await getDocs(query(collection(db, "emails")));
-    const emailResponseList: EmailResponseList = [];
+    const emailResponseList: Array<EmailResponse & { createdAt?: Timestamp }> =
+      [];
     emails.forEach((e) => {
-      emailResponseList.push({ ...(e.data() as EmailResponse), id: e.id });
+      emailResponseList.push({
+        ...(e.data() as EmailResponse & { createdAt?: Timestamp }),
+        id: e.id,
+      });
     });
     return emailResponseList;
   } catch (e) {
@@ -51,6 +56,9 @@ export default async function EmailResponse() {
                 <th className="px-4 py-4.5 text-start">
                   <p className="font-medium">Email Id</p>
                 </th>
+                <th className="px-4 py-4.5 text-start">
+                  <p className="font-medium">Sent At</p>
+                </th>
                 <th className="hidden px-4 py-4.5 text-start sm:table-cell">
                   <p className="font-medium">Subject</p>
                 </th>
@@ -74,6 +82,11 @@ export default async function EmailResponse() {
                         {e.emailId}
                       </p>
                     </div>
+                  </td>
+                  <td className="hidden px-4 py-4.5 sm:table-cell">
+                    <p className="text-sm text-black dark:text-white">
+                      {e.createdAt?.toDate().toString()}
+                    </p>
                   </td>
                   <td className="hidden px-4 py-4.5 sm:table-cell">
                     <p className="text-sm text-black dark:text-white">

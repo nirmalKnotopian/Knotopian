@@ -214,14 +214,14 @@ const SignIn: React.FC = () => {
                   Sign in with Google
                 </button> */}
 
-                <div className="mt-6 text-center">
+                {/* <div className="mt-6 text-center">
                   <p>
                     Don’t have any account?
                     <Link href="/auth/signup" className="text-primary">
                       Sign Up
                     </Link>
                   </p>
-                </div>
+                </div> */}
                 <h1
                   className="mt-6 cursor-pointer text-center text-blue-400"
                   onClick={handleForgotPassword}
