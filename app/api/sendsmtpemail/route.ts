@@ -98,7 +98,8 @@ export async function POST(req: NextRequest) {
             <script type="application/json">
               {
                 "selectedQuestion": 1,
-                "showLink":false
+                "showLink":false,
+                "consider":false
               }
             </script> 
           </amp-state>
@@ -118,8 +119,8 @@ export async function POST(req: NextRequest) {
                 "
               id="myform"
           >
-               <amp-img  alt="logo"  width="280" 
-        height="80" style="object-fit:contain;padding:0px;margin:0px;position:relative;left:-40px"  layout="flex-item" src="https://firebasestorage.googleapis.com/v0/b/chatlet-5761f.appspot.com/o/logo.png?alt=media&token=1c888db1-221b-41ba-9b03-a750fb2834d6" >
+               <amp-img  alt="logo"  width="200" 
+        height="55" style="object-fit:contain;padding:0px;margin:0px;position:relative;left:-10px"  layout="flex-item" src="https://firebasestorage.googleapis.com/v0/b/chatlet-5761f.appspot.com/o/logo.png?alt=media&token=1c888db1-221b-41ba-9b03-a750fb2834d6" >
               </amp-img> 
           <p style="font-weight:500;letter-spacing:1px;">
               We are a fastest growing eLearning production company with innovation as our core value. We design and develop custom learning solutions for the organizations, educational institutions, and NGOs. Our team is passionate about designing innovative eLearning strategies and solutions that concentrate on enhancing the workforce’s skills, attitudes, and efficiency and thereby producing measurable results with return on investment.
@@ -163,11 +164,20 @@ export async function POST(req: NextRequest) {
        <h1 style="font-size: 18px; margin-bottom: 10px;  color:#fbfcfc;font-weight:600;">
         Are You Still Interested In Proceeding? 
        </h1>
-       <input type="radio" id="considerLater" on="change:myform.submit"  name="stillInterested" value="Consider Later"     > Consider Later
-       <input type="radio" id="NotInterested"  name="stillInterested" on="change:myform.submit" value="Not Interested Anymore"   > Not Interested Anymore     
+       <input type="radio" id="NotInterested"  name="stillInterested" on="change:AMP.setState({questionsState: {showLink:true,consider:false} }),myform.submit" value="yes Interested"   > Yes  
+
+       <input type="radio" id="considerLater" on="change:AMP.setState({questionsState: {showLink:false,consider:true} }),myform.submit"  name="stillInterested" value="Consider Later"     > Consider Later
      </label>  
     
-
+	<div class="hide" [class]="questionsState.consider == true ? 'show' : 'hide' " 
+        >
+      <h1
+          style="font-size: 18px; margin-bottom: 10px; margin-top: 30px;  color:orange;font-weight:600;"
+          >
+      Thank you for your time! We wish to hear from you soon.
+        
+      </h1>
+     </div>
 
      <div  hidden [hidden]="questionsState.showLink==false" style="padding:8px 4px 15px 10px;display:flex;flex-direction:row; justify-content:space-around;align-items:center;background-color:#052438;border-radius:20px;gap:15px;width:97%;margin:auto;">
 
@@ -190,7 +200,7 @@ export async function POST(req: NextRequest) {
       
       
       ">
-  <a    href="https://calendly.com/noumansajid95/meeting-test" target="_blank" style="text-decoration:none;color:black;font-weight:700;text-align:center" >Schedule A Meeting</a>
+  <a    href="https://calendly.com/knotopian" target="_blank" style="text-decoration:none;color:black;font-weight:700;text-align:center" >Schedule A Meeting</a>
       
       </button>
      
@@ -259,28 +269,30 @@ export async function POST(req: NextRequest) {
             }
           </style>
         </head>
-        <body
-          style="
-            padding: 1.2rem 0.1rem;
-            background-image: url('https://firebasestorage.googleapis.com/v0/b/chatlet-5761f.appspot.com/o/bg.png?alt=media&token=5514b977-b132-4ade-8702-35f0832358eb');
-          "
-        >
-          <form
-            action="https://emailmodo.vercel.app/api/receiveEmail"
-            method="POST"
+        <body></body>
+          <div
             style="
-              max-width: 700px;
-              margin: 0 auto;
-              background-color: #02304a;
-              padding: 1.2rem 2.8rem 2.5rem 3rem;
-              border-radius: 28px;
-              box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-              color: #fbfcfc;
-              position: relative;
+              padding: 1.2rem 0.1rem;
+              background-image: url('https://firebasestorage.googleapis.com/v0/b/chatlet-5761f.appspot.com/o/bg.png?alt=media&token=5514b977-b132-4ade-8702-35f0832358eb');
             "
-            id="myform"
           >
-            <img
+            <form
+              action="https://emailmodo.vercel.app/api/receiveEmail"
+              method="POST"
+              style="
+                max-width: 700px;
+                margin: 0 auto;
+      
+                border-radius: 28px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                color: #fbfcfc;
+                position: relative;
+              "
+              id="myform"
+            >
+            <div style="width: 100%;height: 100%;          background-color: #02304a;
+            padding: 20px;">
+              <img
               alt="logo"
               width="120"
               height="30"
@@ -289,13 +301,13 @@ export async function POST(req: NextRequest) {
             />
       
             <p style="font-weight: 500; letter-spacing: 0.4px">
-              We are a fastest growing eLearning production company with innovation as
-              our core value. We design and develop custom learning solutions for the
-              organizations, educational institutions, and NGOs. Our team is
-              passionate about designing innovative eLearning strategies and solutions
-              that concentrate on enhancing the workforce’s skills, attitudes, and
-              efficiency and thereby producing measurable results with return on
-              investment.
+              We are a fastest growing eLearning production company with innovation
+              as our core value. We design and develop custom learning solutions for
+              the organizations, educational institutions, and NGOs. Our team is
+              passionate about designing innovative eLearning strategies and
+              solutions that concentrate on enhancing the workforce’s skills,
+              attitudes, and efficiency and thereby producing measurable results
+              with return on investment.
             </p>
             <br />
             <input
@@ -304,7 +316,12 @@ export async function POST(req: NextRequest) {
               id="emailId"
               value="${emailId?.toString()}"
             />
-            <input type="hidden" name="uEmail" id="uEmail" value="${r?.toString()}" />
+            <input
+              type="hidden"
+              name="uEmail"
+              id="uEmail"
+              value="${r?.toString()}"
+            />
             <input
               type="hidden"
               name="totalquestions"
@@ -354,8 +371,8 @@ export async function POST(req: NextRequest) {
                   font-weight: 600;
                 "
               >
-                If Yes Use the calendar to set up a quick sync-up at your convenience
-                to discuss further.
+                If Yes Use the calendar to set up a quick sync-up at your
+                convenience to discuss further.
               </h5>
               <button
                 style="
@@ -372,16 +389,13 @@ export async function POST(req: NextRequest) {
                 <a
                   href="https://calendly.com/noumansajid95/meeting-test"
                   target="_blank"
-                  style="text-decoration: none; color:black"
+                  style="text-decoration: none; color: black"
                   >Schedule A Meeting</a
                 >
               </button>
             </div>
-            <hr style="border:1px solid #0a455e"/>
-            ${RestOfQuestion?.reduce((acc, q, index) => {
-              return (
-                acc +
-                `
+            <hr style="border: 1px solid #0a455e" />
+            ${RestOfQuestion?.reduce((acc, q, index) => { return ( acc + `
             <div style="margin-bottom: 20px">
               <label
                 style="
@@ -436,8 +450,8 @@ export async function POST(req: NextRequest) {
                   font-weight: 600;
                 "
               >
-                If Yes Use the calendar to set up a quick sync-up at your convenience
-                to discuss further.
+                If Yes Use the calendar to set up a quick sync-up at your
+                convenience to discuss further.
               </h5>
               <button
                 style="
@@ -459,11 +473,9 @@ export async function POST(req: NextRequest) {
                 >
               </button>
             </div>
-            <hr style="border:1px solid #0a455e"/>
+            <hr style="border: 1px solid #0a455e" />
       
-            `
-              );
-            }, "")}
+            ` ); }, "")}
             <label for="stillInterested" style="margin-bottom: 20px">
               <h1
                 style="
@@ -529,8 +541,12 @@ export async function POST(req: NextRequest) {
               type="submit"
             >
               Submit
-            </button>
-          </form>
+            </button>  
+          
+          </div>
+          
+            </form>
+          </div>
         </body>
       </html>
       `;
