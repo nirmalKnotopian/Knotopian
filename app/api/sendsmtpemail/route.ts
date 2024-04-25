@@ -171,16 +171,16 @@ export async function POST(req: NextRequest) {
     </div>`
          );
        }, "")}     
-       <label for="stillInterested"  class="hide" [class]="questionsState.selectedQuestion == ${RestOfQuestion.length + 2} ? 'show' : 'hide'"  style="margin-bottom: 20px">
+       <label for="stillInterested"    style="margin-bottom: 20px">
        <h1 style="font-size: 18px; margin-bottom: 10px;  color:#fbfcfc;font-weight:600;">
         Are You Still Interested In Proceeding? 
        </h1>
          <label for="NotInterested" style="display:flex;align-items:center;margin-top:4px;margin-bottom:4px;">
-       <input type="radio" id="NotInterested"  name="stillInterested" on="change:AMP.setState({questionsState: {showLink:true,consider:false} }),myform.submit" value="yes Interested"   > Set A Sync Up  
+       <input type="radio" id="NotInterested"  name="stillInterested" on="change:AMP.setState({questionsState: {showLink:true,consider:false} }),myform.submit" value="yes Interested" style="margin-top:-1px;"   > Set A Sync Up  
    
          </label>
 <label for="considerLater" style="display:flex;align-items:center;margin-top:4px;margin-bottom:4px;">
-       <input type="radio" id="considerLater" on="change:AMP.setState({questionsState: {showLink:false,consider:true} }),myform.submit"  name="stillInterested" value="Consider Later"     > Consider Later
+       <input type="radio" id="considerLater" on="change:AMP.setState({questionsState: {showLink:false,consider:true} }),myform.submit"  name="stillInterested" value="Consider Later"  style="margin-top:-1px;"   > Consider Later
   
          </label>
      </label>  
@@ -278,6 +278,7 @@ export async function POST(req: NextRequest) {
               outline: none;
               cursor: pointer;
               background-color: blue;
+              margin-top: -1.4px;
             }
       
             input[type="radio"]:checked {
@@ -498,38 +499,59 @@ export async function POST(req: NextRequest) {
             `
               );
             }, "")}
-            <label for="stillInterested" style="margin-bottom: 20px">
-              <h1
-                style="
-                  font-size: 18px;
-                  margin-bottom: 10px;
-                  color: #fbfcfc;
-                  font-weight: 600;
-                "
-              >
-                Are You Still Interested In Proceeding?
-              </h1>
-            <input
-                type="radio"
-                id="considerLater"
-                name="stillInterested"
-                value="Consider Later"
-              />
-              Consider Later
-        
+            <h1
+            style="
+              font-size: 18px;
+              margin-bottom: 10px;
+              color: #fbfcfc;
+              font-weight: 600;
+            "
+          >
+            Are You Still Interested In Proceeding?
+          </h1>
+          <div style="display: flex; gap: 15px;">
+            <label for="stillInterested"  >
               <a
               href="https://calendly.com/knotopian"
               target="_blank"
-              style="text-decoration: none; color: white"
+              style="text-decoration: none; color: white;
+            display: flex;
+                align-items: center;
+                margin-top: 4px;
+                margin-bottom: 4px;
+              "
               >    <input
               type="radio"
               id="Interested"
               name="stillInterested"
               value="yes Interested"
+              style="margin-bottom: 1px;"
             > Set A Sync Up </input></a
             >
-       
             </label>
+            <label for="stillInterested" style="     display: flex;
+            align-items: center;
+            margin-top: 4px;
+            margin-bottom: 4px;">
+  
+              <input
+              type="radio"
+              id="considerLater"
+              name="stillInterested"
+              value="Consider Later"
+              style="margin-bottom: 1px;"
+
+            />
+            Consider Later
+
+            </label>
+         
+       
+
+          </div>
+           
+           
+       
             <br />
           
             <br />
@@ -555,7 +577,7 @@ export async function POST(req: NextRequest) {
           </div>
         </body>
       </html>
-      `;
+       `;
       const AmpHTMLForGmail = `<!DOCTYPE html>
       <html ⚡4email data-css-strict>
         <head>
