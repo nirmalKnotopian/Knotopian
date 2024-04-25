@@ -85,7 +85,10 @@ export default async function EmailResponse() {
                   </td>
                   <td className="hidden px-4 py-4.5 sm:table-cell">
                     <p className="text-sm text-black dark:text-white">
-                      {e.createdAt?.toDate().toString()}
+                      {e.createdAt
+                        ?.toDate()
+                        .toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+                        .toString()}
                     </p>
                   </td>
                   <td className="hidden px-4 py-4.5 sm:table-cell">
