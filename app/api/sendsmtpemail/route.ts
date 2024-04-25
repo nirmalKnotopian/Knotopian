@@ -509,45 +509,29 @@ export async function POST(req: NextRequest) {
               >
                 Are You Still Interested In Proceeding?
               </h1>
-              <input
+            <input
                 type="radio"
                 id="considerLater"
                 name="stillInterested"
                 value="Consider Later"
               />
               Consider Later
-              <input
-                type="radio"
-                id="NotInterested"
-                name="stillInterested"
-                value="Not Interested Anymore"
-              />
-              Not Interested Anymore
+        
+              <a
+              href="https://calendly.com/knotopian"
+              target="_blank"
+              style="text-decoration: none; color: white"
+              >    <input
+              type="radio"
+              id="Interested"
+              name="stillInterested"
+              value="yes Interested"
+            > Set A Sync Up </input></a
+            >
+       
             </label>
             <br />
-            <button
-              style="
-                background-color: #e4d00a;
-                color: #fff;
-                border: none;
-                padding: 8px 20px;
-                font-size: 16px;
-                cursor: pointer;
-                border-radius: 4px;
-                margin-top: 10px;
-              "
-            >
-              <a
-                href="https://calendly.com/knotopian"
-                target="_blank"
-                style="text-decoration: none; color: black"
-                >Schedule A Meeting</a
-              >
-            </button>
-            <p>
-              Use the calendar to set up a quick sync-up at your convenience to
-              discuss further.
-            </p>
+          
             <br />
             <button
               style="
