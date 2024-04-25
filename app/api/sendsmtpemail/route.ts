@@ -55,14 +55,22 @@ export async function POST(req: NextRequest) {
             custom-element="amp-bind"
             src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"
           ></script>
+      
           <style amp4email-boilerplate>
+         
             body {
               visibility: hidden;
+              
             }
           </style>
           <style amp-custom>
-            /* any custom styles go here. */
-            
+            body{
+              font-family:"Roboto",sans-serif;
+            }
+             html{
+              font-family:"Roboto",times;
+              
+            }
             .hide {
               display: none;
             }
@@ -80,6 +88,9 @@ export async function POST(req: NextRequest) {
               outline: none;
               cursor: pointer;
               background-color:#00224d;
+              margin-right:15px;
+              align-self:center;
+              margin-top:2px;
             }
             
         
@@ -160,13 +171,18 @@ export async function POST(req: NextRequest) {
     </div>`
          );
        }, "")}     
-       <label for="stillInterested" class="hide" [class]="questionsState.selectedQuestion == ${RestOfQuestion.length + 2} ? 'show' : 'hide'" style="margin-bottom: 20px">
+       <label for="stillInterested"  class="hide" [class]="questionsState.selectedQuestion == ${RestOfQuestion.length + 2} ? 'show' : 'hide'"  style="margin-bottom: 20px">
        <h1 style="font-size: 18px; margin-bottom: 10px;  color:#fbfcfc;font-weight:600;">
         Are You Still Interested In Proceeding? 
        </h1>
-       <input type="radio" id="NotInterested"  name="stillInterested" on="change:AMP.setState({questionsState: {showLink:true,consider:false} }),myform.submit" value="yes Interested"   > Yes  
-
+         <label for="NotInterested" style="display:flex;align-items:center;margin-top:4px;margin-bottom:4px;">
+       <input type="radio" id="NotInterested"  name="stillInterested" on="change:AMP.setState({questionsState: {showLink:true,consider:false} }),myform.submit" value="yes Interested"   > Set A Sync Up  
+   
+         </label>
+<label for="considerLater" style="display:flex;align-items:center;margin-top:4px;margin-bottom:4px;">
        <input type="radio" id="considerLater" on="change:AMP.setState({questionsState: {showLink:false,consider:true} }),myform.submit"  name="stillInterested" value="Consider Later"     > Consider Later
+  
+         </label>
      </label>  
     
 	<div class="hide" [class]="questionsState.consider == true ? 'show' : 'hide' " 
@@ -239,6 +255,7 @@ export async function POST(req: NextRequest) {
           <meta charset="utf-8" />
           <style>
             body {
+              font-family:"Roboto",sans-serif;
             }
           </style>
           <style amp-custom>
@@ -395,7 +412,10 @@ export async function POST(req: NextRequest) {
               </button>
             </div>
             <hr style="border: 1px solid #0a455e" />
-            ${RestOfQuestion?.reduce((acc, q, index) => { return ( acc + `
+            ${RestOfQuestion?.reduce((acc, q, index) => {
+              return (
+                acc +
+                `
             <div style="margin-bottom: 20px">
               <label
                 style="
@@ -475,7 +495,9 @@ export async function POST(req: NextRequest) {
             </div>
             <hr style="border: 1px solid #0a455e" />
       
-            ` ); }, "")}
+            `
+              );
+            }, "")}
             <label for="stillInterested" style="margin-bottom: 20px">
               <h1
                 style="
