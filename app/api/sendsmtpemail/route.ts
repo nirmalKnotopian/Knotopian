@@ -171,7 +171,7 @@ export async function POST(req: NextRequest) {
     </div>`
          );
        }, "")}     
-       <label for="stillInterested"    style="margin-bottom: 20px">
+       <label for="stillInterested"  class="hide" [class]="questionsState.selectedQuestion == ${RestOfQuestion.length + 2} ? 'show' : 'hide'"    style="margin-bottom: 20px">
        <h1 style="font-size: 18px; margin-bottom: 10px;  color:#fbfcfc;font-weight:600;">
         Are You Still Interested In Proceeding? 
        </h1>
